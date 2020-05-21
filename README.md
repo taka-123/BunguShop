@@ -13,8 +13,8 @@ lamp_practice ディレクトリを作成し
 移動します。
 
 ```bash
-mkdir ~/MyDocker/lamp_practice
-cd ~/MyDocker/lamp_practice
+mkdir ~/MyDocker/ec_site
+cd ~/MyDocker/ec_site
 ```
 
 開発課題のリポジトリをフォークして、自分のアカウントのリポジトリにします。  
