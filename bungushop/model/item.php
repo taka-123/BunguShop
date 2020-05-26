@@ -161,6 +161,7 @@ function update_item_status($db, $item_id, $status) {
 }
 
 function delete_item($db, $item_id) {
+    // （SELECTで削除したい画像ファイル名を取得）
     $db->beginTransaction();
     try {
         $sql = "
@@ -186,6 +187,7 @@ function delete_item($db, $item_id) {
         $statement->execute($params);
         
         $db->commit();
+        // 画像削除文（先にSELECTでファイル名を取得しておいて、それをここで削除）
         return true;
         
     } catch (PDOException $e) {

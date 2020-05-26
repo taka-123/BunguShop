@@ -82,20 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // ②削除ボタン実行時の処理終了
     
-}
-// 入力データがPOSTで送信された場合の処理終了Ⅰ
-
-// テーブルの結合参照(カート内の商品情報を取得)
-$carts = get_user_carts($db, $user_id);
-
-// カート内購入予定数取得
-$total_amount = get_total_amount($db, $user_id);
-
-// 入力データがPOSTで送信された場合の処理開始Ⅱ
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {    
-    
     // ③購入処理開始
-    if ($sql_kind === 'purchase') {
+    elseif ($sql_kind === 'purchase') {
         
         // 購入商品毎に、SQL確認
         foreach($carts as $cart) {
@@ -122,8 +110,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     }
     // ③購入処理終了
-
+    
 }
-// 入力データがPOSTで送信された場合の処理終了Ⅱ
+// 入力データがPOSTで送信された場合の処理終了Ⅰ
+
+// テーブルの結合参照(カート内の商品情報を取得)
+$carts = get_user_carts($db, $user_id);
+
+// カート内購入予定数取得
+$total_amount = get_total_amount($db, $user_id);
 
 include_once VIEW_PATH . 'cart_view.php';
