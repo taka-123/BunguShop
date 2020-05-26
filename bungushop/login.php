@@ -8,8 +8,7 @@ session_start();
 $db = get_db_connect();
 
 if (is_logined()){
-    header('Location: ' . HOME_URL);
-    exit;
+    redirect_to(HOME_URL);
 }
 
 // Cookie情報からユーザ名を取得
@@ -60,20 +59,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // (2)管理者用ユーザ名で認証成功
         elseif ($user['user_name'] === USER_NAME_ADMIN){
-            header('Location: ' . ADMIN_URL);
-            exit;
+            redirect_to(ADMIN_ITEM_URL);
         } 
         
         // (3)一般ユーザ名で認証成功
         else {
-            header('Location: ' . HOME_URL);
-            exit;
+            redirect_to(HOME_URL);
         }
         
     }
             
 }
 //POST送信時の処理終了
+
+
 
 // ログインページテンプレートファイル読み込み
 include_once VIEW_PATH . 'login_view.php';

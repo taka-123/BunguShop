@@ -142,6 +142,6 @@
         </form>
 
         <p>未登録の方は以下から<br>アカウントの作成をお願いします</p>
-        <p><a href="./new_account.php">ユーザ登録ページへ</a></p>
+        <p><a href="<?php print NEW_ACCOUNT_URL; ?>">ユーザ登録ページへ</a></p>
     </body>
 </html>

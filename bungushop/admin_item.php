@@ -13,8 +13,7 @@ $login_user = get_login_user($db);
 
 // 管理者としてログインしていない場合、ログインページへ
 if (is_admin($login_user) === false){
-    header('Location: '. LOGIN_URL);
-    exit;
+    redirect_to(LOGIN_URL);
 }
 
 // 初期化
@@ -238,5 +237,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // テーブルを結合し、商品一覧表示のために必要な情報を取得
 $items = get_items($db, false);
 
-// 商品管理ページテンプレートファイル読み込み
 include_once VIEW_PATH . 'admin_item_view.php';

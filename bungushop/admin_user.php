@@ -13,13 +13,10 @@ $login_user = get_login_user($db);
 
 // 管理者としてログインしていない場合、ログインページへ
 if (is_admin($login_user) === false){
-    header('Location: '. LOGIN_URL);
-    exit;
+    redirect_to(LOGIN_URL);
 }
 
 // 登録済みの全ユーザ情報を取得    
 $users = get_all_users($db);
 
-// 商品管理ページテンプレートファイル読み込み
-include_once './view/admin_user_view.php';
-
+include_once VIEW_PATH . 'admin_user_view.php';
