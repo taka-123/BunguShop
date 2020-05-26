@@ -164,7 +164,7 @@
                 <img src="img/structure/logo1.png">
             </a>
             <div class="welcome">
-                <p>ようこそ<a href=./user_info.php><?php print entity_str($login_name); ?>さん</a>！</p>
+                <p>ようこそ、<a href=./user_info.php><?php print entity_str($login_name); ?>さん</a>！</p>
             </div>
             <div class="in_cart">
                 <a href="./cart.php">

@@ -32,8 +32,6 @@ $total = 0;
 $non_num = '/[^0-9]/';  // 「半角数字」以外を含む
 $zero_start = '/\A[0][0-9]+\z/'; // 0から始まる数字 08,023,006など
 
-// カート内購入予定数取得
-$total_amount = get_total_amount($db, $user_id);
 
 // 入力データがPOSTで送信された場合の処理開始Ⅰ
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -41,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cart_id = (int)get_post_data('cart_id');
     $item_id = (int)get_post_data('item_id');
     $amount = (int)get_post_data('amount');
-        
+    
     // ①在庫数変更時の処理開始
     if ($sql_kind === 'amount_update') {
         
@@ -71,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         }
         // エラーが無かった場合の処理終了                
-            
+        
     }
     // ①在庫数変更時の処理終了
     
@@ -84,14 +82,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     // ②削除ボタン実行時の処理終了
     
-    // 購入予定数の合計取得
-    $total_amount = get_total_amount($db, $user_id);
-
 }
 // 入力データがPOSTで送信された場合の処理終了Ⅰ
 
 // テーブルの結合参照(カート内の商品情報を取得)
 $carts = get_user_carts($db, $user_id);
+
+// カート内購入予定数取得
+$total_amount = get_total_amount($db, $user_id);
 
 // 入力データがPOSTで送信された場合の処理開始Ⅱ
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {    
@@ -100,29 +98,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($sql_kind === 'purchase') {
         
         // 購入商品毎に、SQL確認
-        foreach($data as $value) {
+        foreach($carts as $cart) {
             
             // 購入予定商品の現在在庫数を取得
-            $sql = 'SELECT name, stock, amount 
-            FROM bungu_carts INNER JOIN bungu_item_stock 
-            ON bungu_carts.item_id = bungu_item_stock.item_id
-            INNER JOIN bungu_item_master 
-            ON bungu_item_stock.item_id = bungu_item_master.item_id
-            AND user_id = ?
-            AND bungu_carts.item_id = ?';
-            $stmt = $db->prepare($sql);
-            $stmt->bindValue(1, $user_id, PDO::PARAM_INT);
-            $stmt->bindValue(2, $value['item_id'], PDO::PARAM_INT);
-            $stmt->execute();
-            $rows = $stmt->fetchAll();
-            foreach ($rows as $row) {
-                $name = $row['name'];
-                $stock = $row['stock'];
-                $amount = $row['amount'];
-                if ($amount > $stock) {
-                    $errors[] = '「'.$name.'」の在庫が足りません。 残り:'.$stock.'個';
-                }
+            $name = $cart['name'];
+            $stock = $cart['stock'];
+            $amount = $cart['amount'];
+            if ($amount > $stock) {
+                $errors[] = '「'.$name.'」の在庫がありません。 残り:'.$stock.'個';
             }
+        
         }
         // 購入商品毎の更新処理終了
             
