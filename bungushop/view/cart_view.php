@@ -210,7 +210,7 @@
             <tr>
                 <!--商品画像-->
                 <td>
-                    <img src="<?php print entity_str($img_dir . $cart['item_img']) ?>">
+                    <img src="<?php print entity_str(IMAGE_PATH . $cart['item_img']) ?>">
                 </td>
                 <!--商品名-->
                 <td>

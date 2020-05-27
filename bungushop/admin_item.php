@@ -34,13 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // 各種送信データ取得    
     $sql_kind = get_post_data('sql_kind');
-    $item_id = get_post_data('item_id');
+    $item_id = (int)get_post_data('item_id');
     $name = get_post_data('name');
-    $genre_id = get_post_data('genre_id');
-    $price = get_post_data('price');
-    $stock = get_post_data('stock');
+    $genre_id = (int)get_post_data('genre_id');
+    $price = (int)get_post_data('price');
+    $stock = (int)get_post_data('stock');
     $comment = get_post_data('comment');
-    $status = get_post_data('status');
+    $status = (int)get_post_data('status');
     $item_img = get_file_data('item_img');
     
     
@@ -235,6 +235,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // POST送信された場合の処理 終了
 
 // テーブルを結合し、商品一覧表示のために必要な情報を取得
-$items = get_items($db, false);
+$items = get_items($db);
 
 include_once VIEW_PATH . 'admin_item_view.php';

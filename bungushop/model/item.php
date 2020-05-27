@@ -64,6 +64,21 @@ function get_genres($db) {
     return fetch_all_query($db, $sql);
 }
 
+function get_filename($db, $item_id) {
+    $sql = "
+        SELECT
+            item_img
+        FROM
+            bungu_item_master
+        WHERE
+            item_id = ?
+    ";
+    $params = array($item_id);
+    $statement = $db->prepare($sql);
+    $filename = fetchColumn_query($db, $sql, $params);
+    return $filename;
+}
+
 // ジャンルIDの配列を作成
 function get_genre_ids($db) {
     $genres = get_genres($db);
@@ -161,7 +176,9 @@ function update_item_status($db, $item_id, $status) {
 }
 
 function delete_item($db, $item_id) {
-    // （SELECTで削除したい画像ファイル名を取得）
+    // imgデイレクトリの画像ファイルも削除するために、（phpMyAdmin削除前に）該当商品のファイル名を取得
+    $filename = get_filename($db, $item_id);
+
     $db->beginTransaction();
     try {
         $sql = "
@@ -187,7 +204,10 @@ function delete_item($db, $item_id) {
         $statement->execute($params);
         
         $db->commit();
-        // 画像削除文（先にSELECTでファイル名を取得しておいて、それをここで削除）
+        // トランザクション成功時、imgディレクトリに指定の画像ファイルがあることを確認して同じく削除
+        if(file_exists(IMAGE_DIR . $filename) === true){
+            unlink(IMAGE_DIR . $filename);
+        }
         return true;
         
     } catch (PDOException $e) {

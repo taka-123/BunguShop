@@ -26,8 +26,6 @@ if (get_session('permission') !== 'ok') {
 // ページ遷移判断リセット
 set_session_empty('permission');
 
-$img_dir = './img/';
-
 $user_id = $_SESSION['user_id'];
 $top_user_name = $_SESSION['user_name'];
 

@@ -193,7 +193,7 @@
         <?php foreach ($data as $value) { ?>
             <div class="product">
                 <div class="left">
-                    <img src="<?php print entity_str($img_dir . $value['item_img']) ?>">
+                    <img src="<?php print entity_str(IMAGE_PATH . $value['item_img']) ?>">
                 </div>
                 <div class="right">
                     <p>商品名: <?php print entity_str($value['name']); ?></p>

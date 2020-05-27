@@ -233,7 +233,7 @@
             <?php foreach ($items as $item) { ?>
             <div class="product">
                 <div class="left">
-                    <img src="<?php print entity_str($img_dir . $item['item_img']); ?>" title="<?php print entity_str($item['comment']); ?>">
+                    <img src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>" title="<?php print entity_str($item['comment']); ?>">
                 </div>
                 <div class="right">
                     <p>商品名: <?php print entity_str($item['name']); ?></p>

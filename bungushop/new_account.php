@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_name = get_post_data('user_name');
     $passwd = get_post_data('passwd');
     $mail = get_post_data('mail');
-    $sex = get_post_data('sex');
+    $sex = (int)get_post_data('sex');
     $birthdate = get_post_data('birth');
 
     //

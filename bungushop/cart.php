@@ -20,8 +20,6 @@ $user_id = (int)get_session('user_id');
 // ログイン中のユーザ名を取得
 $login_name = get_login_name($db);
 
-$img_dir = './img/';
-
 // 初期化
 $sub_total_list = [];
 $errors = [];
