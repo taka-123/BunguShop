@@ -4,9 +4,10 @@
         <title>ユーザアカウント情報</title>
         <meta charset="UTF-8">
         <style>
+            /* header_loginedテンプレート用  */
             header {
                 display: flex;
-                height: 70px;
+                height: 75px;
                 border-bottom: 1px solid;
                 background-color: rgb(16,45,40);
             }
@@ -18,12 +19,19 @@
             }
             
             .welcome {
-                flex: 5;
+                flex: 4;
                 color: white;
                 text-align: center;
             }
             
-            .log_out {
+            .in_cart {
+                flex: 1;
+                color: white;
+                text-align: center;
+                position: relative;
+            }
+
+            .nav-item {
                 flex: 1.1;
                 text-align: center;
                 border-left: 1px solid black;
@@ -42,7 +50,25 @@
                 color: white;
             }
             
-            .log_out a {
+            .in_cart a {
+                display: block;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                line-height: 10px;
+                color: #f06704;
+                font-weight: bold;
+                text-decoration: none;
+            }
+            
+            .in_cart img {
+                height: 60%;
+                padding: 14px 0;
+            }
+            
+            .nav-item a {
                 display: block;
                 height: 100%;
                 width:100%;
@@ -53,6 +79,7 @@
                 color: white;
                 text-decoration: none;
             }
+            /* header_loginedテンプレート用終了 */
             
             
             h1 {
@@ -123,17 +150,7 @@
         </style>
     </head>
     <body>
-        <header>
-            <a class="logo" href="./itemlist.php">
-                <img src="img/structure/logo1.png">
-            </a>
-            <div class="welcome">
-                <p>ようこそ、<a href=./user_info.php><?php print entity_str($login_name); ?>さん</a>！</p>
-            </div>
-            <div class="log_out">
-                <a href="./logout.php">ログアウト</a>
-            </div>
-        </header>
+        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>

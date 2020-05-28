@@ -4,9 +4,10 @@
         <title>ログイン画面</title>
         <meta charset="UTF-8">
         <style>
+            /* headerテンプレート用CSS  */
             header {
                 display: flex;
-                height: 70px;
+                height: 75px;
                 border-bottom: 1px solid;
                 background-color: rgb(16,45,40);
             }
@@ -14,22 +15,39 @@
             .logo {
                 flex: 1;
                 text-align: center;
+                padding: 0 10px;
+                border-right: 1px solid black;
             }
-            
+
             .welcome {
                 flex: 5;
                 color: white;
-                border-left: 1px solid black;
                 text-align: center;
+            }
+
+            .nav-item {
+                flex: 1;
+                text-align: center;
+                border-left: 1px solid black;
+                position: relative;
             }
             
             .logo img {
                 height: 100%;
             }
-            
-            .welcome p {
-                margin: 12px 0;
+
+            .nav-item a {
+                display: block;
+                height: 100%;
+                width:100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                line-height: 70px;
+                color: white;
+                text-decoration: none;
             }
+            /* headerテンプレート用CSS終了 */
             
             
             .error {
@@ -102,17 +120,7 @@
         </style>
     </head>
     <body>
-        <header>
-            <a class="logo" href="#">
-                <img src="img/structure/logo1.png">
-            </a>
-            <div class="welcome">
-                <p>Welcome to  " BUNGU ONLINE SHOP " !!</p>
-            </div>
-            <a class="logo" href="#">
-                <img src="img/structure/logo1.png">
-            </a>
-        </header>
+        <?php include VIEW_PATH . 'templates/header.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>

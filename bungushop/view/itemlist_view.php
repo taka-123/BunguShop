@@ -4,6 +4,7 @@
         <title>一覧画面</title>
         <meta charset="UTF-8">
         <style>
+            /* header_loginedテンプレート用  */
             header {
                 display: flex;
                 height: 70px;
@@ -30,7 +31,7 @@
                 position: relative;
             }
 
-            .log_out {
+            .nav-item {
                 flex: 1.1;
                 text-align: center;
                 border-left: 1px solid black;
@@ -67,7 +68,7 @@
                 padding: 14px 0;
             }
             
-            .log_out a {
+            .nav-item a {
                 display: block;
                 height: 100%;
                 width:100%;
@@ -78,7 +79,8 @@
                 color: white;
                 text-decoration: none;
             }
-            
+            /* header_loginedテンプレート用終了 */
+                        
             
             h1 {
                 padding: 20px 0;
@@ -165,23 +167,7 @@
         </style>
     </head>
     <body>
-        <header>
-            <a class="logo" href="#">
-                <img src="img/structure/logo1.png">
-            </a>
-            <div class="welcome">
-                <p>ようこそ、<a href=./user_info.php><?php print entity_str($login_name); ?>さん</a>！</p>
-            </div>
-            <div class="in_cart">
-                <a href="./cart.php">
-                    <img src="img/structure/cart.png">
-                    <?php print $total_amount; ?>
-                </a>
-            </div>
-            <div class="log_out">
-                <a href="./logout.php">ログアウト</a>
-            </div>
-        </header>
+        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>

@@ -82,9 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         insert_user($db, $user_name, $passwd, $mail, $sex, $birthdate); 
         
-        // 正しいページ遷移判断のためにセッション定義
-        set_session('permission', 'ok');
-        
         redirect_to(COMPLETION_URL);
     }
  

@@ -111,7 +111,6 @@ function is_admin($user) {
 
 // ユーザ新規登録
 function insert_user($db, $user_name, $passwd, $mail, $sex, $birthdate) {
-    $db->beginTransaction();
     $sql = "
         INSERT INTO bungu_users(
             user_name,

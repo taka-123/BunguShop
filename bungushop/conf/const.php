@@ -4,6 +4,7 @@ define('MODEL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/model/');
 define('VIEW_PATH', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/view/');
 define('IMAGE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/img/' );
 define('IMAGE_PATH', 'img/');
+define('LOGO_PATH', 'img/structure/');
 
 define('DB_HOST', 'mysql');
 define('DB_USER', 'testuser');

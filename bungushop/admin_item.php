@@ -11,10 +11,15 @@ $db = get_db_connect();
 // ログイン中のユーザ情報を取得
 $login_user = get_login_user($db);
 
+// ログイン中のユーザ名を取得
+$login_name = get_login_name($db);
+
 // 管理者としてログインしていない場合、ログインページへ
-if (is_admin($login_user) === false){
+if (is_admin($user) === false){
     redirect_to(LOGIN_URL);
 }
+
+
 
 // 初期化
 $sql_kind = '';
