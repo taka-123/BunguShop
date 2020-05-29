@@ -8,15 +8,16 @@ function get_user_carts($db, $user_id){
             bungu_carts.cart_id,
             bungu_carts.user_id,
             bungu_carts.item_id,
+            bungu_carts.amount,
             bungu_item_master.name,
             bungu_item_master.genre_id,
-            bungu_item_genre.genre_name,
             bungu_item_master.price,
             bungu_item_master.item_img,
             bungu_item_master.comment,
             bungu_item_master.status,
+            bungu_item_genre.genre_name,
             bungu_item_stock.stock,
-            bungu_carts.amount
+            bungu_item_master.price * bungu_carts.amount AS sub_total
         FROM
             bungu_carts
         JOIN
@@ -36,6 +37,25 @@ function get_user_carts($db, $user_id){
     ";
     $params = array($user_id);
     return fetch_all_query($db, $sql, $params);
+}
+
+function get_total_price($db, $user_id) {
+    $sql = "
+        SELECT 
+            sum(bungu_item_master.price * bungu_carts.amount) 
+        FROM 
+            bungu_carts 
+        JOIN
+            bungu_item_master
+        ON
+            bungu_carts.item_id = bungu_item_master.item_id
+        WHERE 
+            user_id = ?
+        GROUP BY 
+            user_id
+    ";
+    $params = array($user_id);
+    return fetchColumn_query($db, $sql, $params);
 }
 
 function get_total_amount($db, $user_id) {

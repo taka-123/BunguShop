@@ -1,9 +1,9 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
+require_once MODEL_PATH . 'cart.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'user.php';
-require_once MODEL_PATH . 'cart.php';
 
 session_start();
 
@@ -18,7 +18,7 @@ if (is_logined() === false) {
 $user_id = (int)get_session('user_id');
 
 // ログイン中のユーザ名を取得
-$login_name = get_login_name($db);
+$login_name = get_session('user_name');
 
 // 初期化
 $refine = '';
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $refine = '[検索条件] 「' . $genre_name . '」ジャンルの商品';
             }
             if ($name !== '' && $genre_id !== 0) {
-                $refine = '[検索条件] 「' . $genre_name . '」ジャンルの、名前に『' . $name . '』を含む商品';
+                $refine = '[検索条件] 、名前に『' . $name . '』を含む、「' . $genre_name . '」ジャンルの商品';
             }
             
             $items = get_open_items($db, $name, $genre_id);

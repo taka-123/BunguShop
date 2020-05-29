@@ -76,7 +76,7 @@ function get_user_by_name($db, $user_name) {
 
 // 「ログイン認証用関数」
 // ユーザ名から情報を取得し、入力のパスワードと登録のそれが一致した場合、
-// セッションにユーザIDを保存し、取得したユーザ情報を返す。
+// セッションにユーザID,ユーザ名を保存し、取得したユーザ情報を返す。
 // ユーザ名未登録またはパスワード不一致の場合、falseを返す。
 function login_as($db, $user_name, $passwd){
     $user = get_user_by_name($db, $user_name);
@@ -84,6 +84,7 @@ function login_as($db, $user_name, $passwd){
         return false;
     }
     set_session('user_id', $user['user_id']);
+    set_session('user_name', $user['user_name']);
     return $user;
 }
 
@@ -124,5 +125,19 @@ function insert_user($db, $user_name, $passwd, $mail, $sex, $birthdate) {
         VALUES(?, ?, ?, ?, ?, now(), now());
     ";
     $params = array($user_name, $passwd, $mail, $sex, $birthdate);
+    return execute_query($db, $sql, $params);
+}
+
+function update_user_mail($db, $mail, $user_id) {
+    $sql = "
+        UPDATE
+            bungu_users
+        SET
+            mail = ?,
+            update_datetime = now()
+        WHERE
+            user_id = ?
+    ";
+    $params = array($mail, $user_id);
     return execute_query($db, $sql, $params);
 }

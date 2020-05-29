@@ -3,85 +3,8 @@
     <head>
         <title>ショッピングカート</title>
         <meta charset="UTF-8">
+        <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
         <style>
-            /* header_loginedテンプレート用  */
-            header {
-                display: flex;
-                height: 75px;
-                border-bottom: 1px solid;
-                background-color: rgb(16,45,40);
-            }
-            
-            .logo {
-                flex: 1;
-                text-align: center;
-                border-right: 1px solid black;
-            }
-            
-            .welcome {
-                flex: 4;
-                color: white;
-                text-align: center;
-            }
-            
-            .in_cart {
-                flex: 1;
-                color: white;
-                text-align: center;
-                position: relative;
-            }
-
-            .nav-item {
-                flex: 1.1;
-                text-align: center;
-                border-left: 1px solid black;
-                position: relative;
-            }
-            
-            .logo img {
-                height: 100%;
-            }
-            
-            .welcome p {
-                margin: 23px 0;
-            }
-            
-            .welcome a {
-                color: white;
-            }
-            
-            .in_cart a {
-                display: block;
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                line-height: 10px;
-                color: #f06704;
-                font-weight: bold;
-                text-decoration: none;
-            }
-            
-            .in_cart img {
-                height: 60%;
-                padding: 14px 0;
-            }
-            
-            .nav-item a {
-                display: block;
-                height: 100%;
-                width:100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                line-height: 70px;
-                color: white;
-                text-decoration: none;
-            }
-            /* header_loginedテンプレート用終了 */
-            
-            
             h1 {
                 padding: 20px 0;
                 text-align: center;
@@ -215,8 +138,6 @@
                         <input type="submit" value="変更">                        
                     </td>
                 </form>
-                <!--小計を計算＆配列に格納（表示はしない）-->
-                <?php $sub_total_list[] = $cart['price'] * $cart['amount']; ?>
                 <!--削除-->
                 <form method="POST">
                     <td>
@@ -231,11 +152,8 @@
             <!--商品の繰り返し表示終了-->
             
             <!--合計金額-->
-            <?php foreach ($sub_total_list as $sub_total) {
-                $total += $sub_total; 
-            } ?>
             <div class ="buy">
-                <p class="total">合計金額: <span>¥ <?php print number_format($total); ?></span></p>
+                <p class="total">合計金額: <span>¥ <?php print number_format($total_price); ?></span></p>
                 <div class="purchase">
                     <form method="POST">
                         <input type="hidden" name="sql_kind" value="purchase">

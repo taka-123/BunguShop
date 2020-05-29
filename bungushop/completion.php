@@ -8,7 +8,12 @@ session_start();
 $db = get_db_connect();
 
 // ログイン中のユーザ名を取得
-$login_name = get_login_name($db);
+$login_name = get_session('user_name');
+
+// 正しいページ遷移でない場合（直接アクセス）、カートページへリダイレクト
+if (get_session('permission') !== 'ok') {
+    redirect_to(NEW_ACCOUNT_URL);
+}
 
 // ページ遷移判断リセット
 set_session_empty('permission');

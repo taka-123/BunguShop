@@ -1,8 +1,8 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
-require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
+require_once MODEL_PATH . 'user.php';
 
 session_start();
 
@@ -12,14 +12,12 @@ $db = get_db_connect();
 $login_user = get_login_user($db);
 
 // ログイン中のユーザ名を取得
-$login_name = get_login_name($db);
+$login_name = get_session('user_name');
 
 // 管理者としてログインしていない場合、ログインページへ
-if (is_admin($user) === false){
+if (is_admin($login_user) === false){
     redirect_to(LOGIN_URL);
 }
-
-
 
 // 初期化
 $sql_kind = '';
@@ -33,7 +31,6 @@ $genres = get_genres($db);
 $non_num = '/[^0-9]/';  // 「半角数字」以外を含む
 $zero_start = '/\A[0][0-9]+\z/'; // 0から始まる数字 08,023,006など
     
-
 // POST送信された場合の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -47,8 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comment = get_post_data('comment');
     $status = (int)get_post_data('status');
     $item_img = get_file_data('item_img');
-    
-    
+     
     // ①「商品新規登録」時のエラーチェック
     if ($sql_kind === 'insert') {
     
@@ -193,7 +189,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     }
 
-    
     // 上記エラーに１つも該当しない場合、
     if (count($errors) === 0) {
 

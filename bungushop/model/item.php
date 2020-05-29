@@ -8,14 +8,14 @@ function get_items($db, $is_open = false, $name = '', $genre_id = 0) {
     $sql = "
         SELECT
             bungu_item_master.item_id,
-            name,
+            bungu_item_master.name,
             bungu_item_master.genre_id,
-            price,
-            item_img,
-            comment,
-            status,
-            stock,
-            genre_name
+            bungu_item_master.price,
+            bungu_item_master.item_img,
+            bungu_item_master.comment,
+            bungu_item_master.status,
+            bungu_item_genre.genre_name,
+            bungu_item_stock.stock
         FROM
             bungu_item_master
         JOIN

@@ -1,13 +1,15 @@
 <?php 
 require_once './conf/const.php';
+require_once MODEL_PATH . 'common.php';
+require_once MODEL_PATH . 'user.php';
 
-// セッション開始
 session_start();
 
-// セッション変数からログイン済みか確認
-if (!isset($_SESSION['user_id'])) {
-    // ログインしていない場合、ログインページへリダイレクト
-    redirect_to(LOGIN_URL);
+$db = get_db_connect();
+
+// ログインしていない場合、ログインページへ
+if (is_logined() === false) {
+  redirect_to(LOGIN_URL);
 }
 
 // セッション名取得 ※デフォルトはPHPSESSID

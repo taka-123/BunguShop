@@ -3,85 +3,8 @@
     <head>
         <title>ショッピングカート</title>
         <meta charset="UTF-8">
+        <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
         <style>
-            /* header_loginedテンプレート用  */
-            header {
-                display: flex;
-                height: 75px;
-                border-bottom: 1px solid;
-                background-color: rgb(16,45,40);
-            }
-            
-            .logo {
-                flex: 1;
-                text-align: center;
-                border-right: 1px solid black;
-            }
-            
-            .welcome {
-                flex: 4;
-                color: white;
-                text-align: center;
-            }
-            
-            .in_cart {
-                flex: 1;
-                color: white;
-                text-align: center;
-                position: relative;
-            }
-
-            .nav-item {
-                flex: 1.1;
-                text-align: center;
-                border-left: 1px solid black;
-                position: relative;
-            }
-            
-            .logo img {
-                height: 100%;
-            }
-            
-            .welcome p {
-                margin: 23px 0;
-            }
-            
-            .welcome a {
-                color: white;
-            }
-            
-            .in_cart a {
-                display: block;
-                height: 100%;
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                line-height: 10px;
-                color: #f06704;
-                font-weight: bold;
-                text-decoration: none;
-            }
-            
-            .in_cart img {
-                height: 60%;
-                padding: 14px 0;
-            }
-            
-            .nav-item a {
-                display: block;
-                height: 100%;
-                width:100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                line-height: 70px;
-                color: white;
-                text-decoration: none;
-            }
-            /* header_loginedテンプレート用終了 */
-            
-            
             h1 {
                 padding: 10px 0;
                 text-align: center;
@@ -171,34 +94,34 @@
         </p>
         
         <p class="total">
-            合計金額: <span>¥ <?php print number_format($total); ?></span>
+            合計金額: <span>¥ <?php print number_format($total_price); ?></span>
         </p>
 
         <form method="POST">
         <!--商品の繰り返し表示開始-->
-        <?php foreach ($data as $value) { ?>
+        <?php foreach ($carts as $cart) { ?>
             <div class="product">
                 <div class="left">
-                    <img src="<?php print entity_str(IMAGE_PATH . $value['item_img']) ?>">
+                    <img src="<?php print entity_str(IMAGE_PATH . $cart['item_img']) ?>">
                 </div>
                 <div class="right">
-                    <p>商品名: <?php print entity_str($value['name']); ?></p>
+                    <p>商品名: <?php print entity_str($cart['name']); ?></p>
                     <p>
                         <span class="price">
-                            ¥ <?php print number_format(entity_str($value['price'])); ?>
+                            ¥ <?php print number_format(entity_str($cart['price'])); ?>
                         </span>
                         <span>
                             ×
                         </span>
                         <span>
-                            <?php print entity_str($value['amount']); ?> 個
+                            <?php print entity_str($cart['amount']); ?> 個
                         </span>
                     </p>
                     <p>
                         =
                         <span class="sub_total">
                             <!--小計を表示-->
-                            ¥ <?php print number_format(entity_str($value['price'] * $value['amount'])) ?>
+                            ¥ <?php print number_format(entity_str($cart['sub_total'])) ?>
                         </span>
                     </p>
                 </div>

@@ -1,9 +1,9 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
+require_once MODEL_PATH . 'cart.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'user.php';
-require_once MODEL_PATH . 'cart.php';
 
 session_start();
 
@@ -18,13 +18,10 @@ if (is_logined() === false) {
 $user_id = (int)get_session('user_id');
 
 // ログイン中のユーザ名を取得
-$login_name = get_login_name($db);
+$login_name = get_session('user_name');
 
 // 初期化
-$sub_total_list = [];
 $errors = [];
-$sub_total = 0;
-$total = 0;
 
 // 正規表現
 $non_num = '/[^0-9]/';  // 「半角数字」以外を含む
@@ -82,6 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // ③購入処理開始
     elseif ($sql_kind === 'purchase') {
+
+        // テーブルの結合参照(カート内の商品情報を取得)
+        $carts = get_user_carts($db, $user_id);
         
         // 購入商品毎に、SQL確認
         foreach($carts as $cart) {
@@ -117,5 +117,7 @@ $carts = get_user_carts($db, $user_id);
 
 // カート内購入予定数取得
 $total_amount = get_total_amount($db, $user_id);
+
+$total_price = get_total_price($db, $user_id);
 
 include_once VIEW_PATH . 'cart_view.php';

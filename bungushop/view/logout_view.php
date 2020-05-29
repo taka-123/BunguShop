@@ -3,52 +3,8 @@
     <head>
         <title>ログアウト</title>
         <meta charset="UTF-8">
+        <link href="./css/header.css" rel="stylesheet" type="text/css"/>
         <style>
-            /* headerテンプレート用CSS  */
-            header {
-                display: flex;
-                height: 75px;
-                border-bottom: 1px solid;
-                background-color: rgb(16,45,40);
-            }
-            
-            .logo {
-                flex: 1;
-                text-align: center;
-                border-right: 1px solid black;
-            }
-
-            .welcome {
-                flex: 4;
-                color: white;
-                text-align: center;
-            }
-
-            .nav-item {
-                flex: 1;
-                text-align: center;
-                border-left: 1px solid black;
-                position: relative;
-            }
-            
-            .logo img {
-                height: 100%;
-            }
-
-            .nav-item a {
-                display: block;
-                height: 100%;
-                width:100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                line-height: 70px;
-                color: white;
-                text-decoration: none;
-            }
-            /* headerテンプレート用CSS終了 */            
-            
-
             h1 {
                 padding: 20px 0;
                 text-align: center;

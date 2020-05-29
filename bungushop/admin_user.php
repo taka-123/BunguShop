@@ -1,8 +1,8 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
-require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
+require_once MODEL_PATH . 'user.php';
 
 session_start();
 
@@ -12,7 +12,7 @@ $db = get_db_connect();
 $login_user = get_login_user($db);
 
 // ログイン中のユーザ名を取得
-$login_name = get_login_name($db);
+$login_name = get_session('user_name');
 
 // 管理者としてログインしていない場合、ログインページへ
 if (is_admin($login_user) === false){
