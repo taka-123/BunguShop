@@ -39,6 +39,11 @@ $items = get_open_items($db);
 
 // POST送信時の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
     
     $sql_kind = get_post_data('sql_kind');
     $item_id = (int)get_post_data('item_id');
@@ -131,5 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // カート内購入予定数合計取得
 $total_amount = get_total_amount($db, $user_id);
+
+$token = get_csrf_token();
 
 include_once VIEW_PATH . 'itemlist_view.php';

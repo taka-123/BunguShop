@@ -1,3 +1,4 @@
+<?php header("X-FRAME-OPTIONS: SAMEORIGIN"); ?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -135,6 +136,7 @@
                         <input class="amount_change" type="text" name="amount" value="<?php print entity_str($cart['amount']); ?>">個
                         <input type="hidden" name="sql_kind" value="amount_update">
                         <input type="hidden" name="item_id" value="<?php print entity_str($cart['item_id']); ?>">
+                        <input type="hidden" name="token" value="<?php print $token; ?>">
                         <input type="submit" value="変更">                        
                     </td>
                 </form>
@@ -144,6 +146,7 @@
                         <input type="hidden" name="sql_kind" value="delete">
                         <input type="hidden" name="cart_id" value="<?php print entity_str($cart['cart_id']); ?>">
                         <input type="hidden" name="item_id" value="<?php print entity_str($cart['item_id']); ?>">
+                        <input type="hidden" name="token" value="<?php print $token; ?>">
                         <input type="submit" value="削除">                        
                     </td>
                 </form>
@@ -157,6 +160,7 @@
                 <div class="purchase">
                     <form method="POST">
                         <input type="hidden" name="sql_kind" value="purchase">
+                        <input type="hidden" name="token" value="<?php print $token; ?>">
                         <input type="submit" value="購入する" id="purchase">
                     </form>
                 </div>

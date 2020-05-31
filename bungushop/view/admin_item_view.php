@@ -1,3 +1,4 @@
+<?php header("X-FRAME-OPTIONS: SAMEORIGIN"); ?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -117,6 +118,7 @@
                 </div>
                 <div>
                     <input type="hidden" name="sql_kind" value="insert">
+                    <input type="hidden" name="token" value="<?php print $token; ?>">
                     <input type="submit" id="insert" value="商品を追加する">
                 </div>
             </form>   
@@ -160,6 +162,8 @@
                             <input class="stock_change" type="text" name="stock" value="<?php print entity_str($item['stock']); ?>">個
                             <input type="hidden" name="sql_kind" value="stock_update">
                             <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="変更">                        
                         </td>
                     </form>
@@ -170,10 +174,12 @@
                             <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
                         <!--現在、公開(1)の場合-->
                         <?php if ($item['status'] === 1) { ?>
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="公開 → 非公開">
                             <input type="hidden" name="status" value="0">
                         <!--現在、非公開(0)の場合-->
                         <?php } else { ?>
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="非公開 → 公開">
                             <input type="hidden" name="status" value="1">
                         <?php } ?>
@@ -182,6 +188,7 @@
                     <!--削除-->
                     <form method="POST">
                         <td>
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="削除">
                             <input type="hidden" name="sql_kind" value="delete">
                             <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">

@@ -24,6 +24,11 @@ $errors = [];
 // 入力データがPOSTで送信された場合の処理開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
+
     $mail = get_post_data('mail');
 
     // 「メールアドレス」について
@@ -52,5 +57,7 @@ if ($user['sex'] === 0) {
 if ($user['sex'] === 1) {
     $sex = '女性';
 }
+
+$token = get_csrf_token();
 
 include_once VIEW_PATH . 'user_info_view.php';

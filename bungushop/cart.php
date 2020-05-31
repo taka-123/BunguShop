@@ -30,6 +30,12 @@ $zero_start = '/\A[0][0-9]+\z/'; // 0から始まる数字 08,023,006など
 
 // 入力データがPOSTで送信された場合の処理開始Ⅰ
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
+
     $sql_kind = get_post_data('sql_kind');
     $cart_id = (int)get_post_data('cart_id');
     $item_id = (int)get_post_data('item_id');
@@ -119,5 +125,7 @@ $carts = get_user_carts($db, $user_id);
 $total_amount = get_total_amount($db, $user_id);
 
 $total_price = get_total_price($db, $user_id);
+
+$token = get_csrf_token();
 
 include_once VIEW_PATH . 'cart_view.php';
