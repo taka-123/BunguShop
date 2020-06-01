@@ -31,6 +31,11 @@ function set_session($name, $value) {
     $_SESSION[$name] = $value;
 }
 
+// セッションの引数1指定のnameを空にする
+function set_session_empty($name) {
+    set_session($name, '');
+}
+
 // 特殊文字をHTMLエンティティに変換する
 function entity_str($str) {
     return htmlspecialchars($str, ENT_QUOTES, HTML_CHARACTER_SET);

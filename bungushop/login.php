@@ -7,9 +7,9 @@ session_start();
 
 $db = get_db_connect();
 
+// ログインしている場合、商品一覧ページへ
 if (is_logined()){
-    header('Location: ' . HOME_URL);
-    exit;
+    redirect_to(HOME_URL);
 }
 
 // Cookie情報からユーザ名を取得
@@ -20,6 +20,11 @@ $errors = [];
 
 // 入力データがPOSTで送信された場合の処理開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
     
     $user_name = get_post_data('user_name');
     $passwd = get_post_data('passwd');
@@ -60,20 +65,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // (2)管理者用ユーザ名で認証成功
         elseif ($user['user_name'] === USER_NAME_ADMIN){
-            header('Location: ' . ADMIN_URL);
-            exit;
+            redirect_to(ADMIN_ITEM_URL);
         } 
         
         // (3)一般ユーザ名で認証成功
         else {
-            header('Location: ' . HOME_URL);
-            exit;
+            redirect_to(HOME_URL);
         }
         
     }
             
 }
 //POST送信時の処理終了
+
+$token = get_csrf_token();
 
 // ログインページテンプレートファイル読み込み
 include_once VIEW_PATH . 'login_view.php';

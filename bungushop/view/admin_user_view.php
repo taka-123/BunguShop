@@ -3,54 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>BUNGU SHOP ユーザ管理ページ</title>
+        <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
         <style>
-            header {
-                display: flex;
-                height: 70px;
-                border-bottom: 1px solid;
-                background-color: rgb(16,45,40);
-            }
-            
-            .logo {
-                flex: 1;
-                text-align: center;
-                border-right: 1px solid black;
-            }
-            
-            .welcome {
-                flex: 4;
-                color: white;
-                text-align: center;
-            }
-
-            .log_out {
-                flex: 1;
-                text-align: center;
-                position: relative;
-                border-left: 1px solid black;
-            }
-            
-            .logo img {
-                height: 100%;
-            }
-            
-            .welcome p {
-                margin: 23px;
-            }
-            
-            .log_out a {
-                display: block;
-                height: 100%;
-                width:100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                line-height: 70px;
-                color: white;
-                text-decoration: none;
-            }
-            
-            
             table, th, td {
                 border: 1px solid;
                 border-collapse: collapse;
@@ -71,17 +25,7 @@
     </head> 
     
     <body>
-        <header>
-            <a class="logo" href="./admin_item.php">
-                <img src="img/structure/logo1.png">
-            </a>
-            <div class="welcome">
-                <p>管理者専用ページ</p>
-            </div>
-            <div class="log_out">
-                <a href="./logout.php">ログアウト</a>
-            </div>
-        </header>
+        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
         <h1>BUNGU SHOP ユーザ管理ページ</h1>
         <p><a href="./admin_item.php">商品管理ページへ</a></p>

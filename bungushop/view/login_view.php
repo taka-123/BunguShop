@@ -1,37 +1,11 @@
+<?php header("X-FRAME-OPTIONS: SAMEORIGIN"); ?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
         <title>ログイン画面</title>
         <meta charset="UTF-8">
+        <link href="./css/header.css" rel="stylesheet" type="text/css"/>
         <style>
-            header {
-                display: flex;
-                height: 70px;
-                border-bottom: 1px solid;
-                background-color: rgb(16,45,40);
-            }
-            
-            .logo {
-                flex: 1;
-                text-align: center;
-            }
-            
-            .welcome {
-                flex: 5;
-                color: white;
-                border-left: 1px solid black;
-                text-align: center;
-            }
-            
-            .logo img {
-                height: 100%;
-            }
-            
-            .welcome p {
-                margin: 12px 0;
-            }
-            
-            
             .error {
                 list-style: none;
                 color: red;
@@ -102,17 +76,7 @@
         </style>
     </head>
     <body>
-        <header>
-            <a class="logo" href="#">
-                <img src="img/structure/logo1.png">
-            </a>
-            <div class="welcome">
-                <p>Welcome to  " BUNGU ONLINE SHOP " !!</p>
-            </div>
-            <a class="logo" href="#">
-                <img src="img/structure/logo1.png">
-            </a>
-        </header>
+        <?php include VIEW_PATH . 'templates/header.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>
@@ -138,10 +102,11 @@
                     <input type="checkbox" name="cookie_check" value="checked">次回からユーザ名の入力を省略
                 </li>
             </ul>
+            <input type="hidden" name="token" value="<?php print $token; ?>">
             <input type=submit value="ログイン">
         </form>
 
         <p>未登録の方は以下から<br>アカウントの作成をお願いします</p>
-        <p><a href="./new_account.php">ユーザ登録ページへ</a></p>
+        <p><a href="<?php print NEW_ACCOUNT_URL; ?>">ユーザ登録ページへ</a></p>
     </body>
 </html>

@@ -1,8 +1,8 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
-require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
+require_once MODEL_PATH . 'user.php';
 
 session_start();
 
@@ -11,16 +11,16 @@ $db = get_db_connect();
 // ログイン中のユーザ情報を取得
 $login_user = get_login_user($db);
 
+// ログイン中のユーザ名を取得
+$login_name = get_session('user_name');
+
 // 管理者としてログインしていない場合、ログインページへ
 if (is_admin($login_user) === false){
-    header('Location: '. LOGIN_URL);
-    exit;
+    redirect_to(LOGIN_URL);
 }
 
 // 初期化
-$sql_kind = '';
 $errors = [];
-$data = [];
 
 // ジャンル一覧取得
 $genres = get_genres($db);
@@ -29,22 +29,26 @@ $genres = get_genres($db);
 $non_num = '/[^0-9]/';  // 「半角数字」以外を含む
 $zero_start = '/\A[0][0-9]+\z/'; // 0から始まる数字 08,023,006など
     
-
 // POST送信された場合の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // 各種送信データ取得    
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
+    
+    // 各種送信データ取得
     $sql_kind = get_post_data('sql_kind');
-    $item_id = get_post_data('item_id');
+    $item_id = (int)get_post_data('item_id');
     $name = get_post_data('name');
-    $genre_id = get_post_data('genre_id');
-    $price = get_post_data('price');
-    $stock = get_post_data('stock');
+    $genre_id = (int)get_post_data('genre_id');
+    $price = (int)get_post_data('price');
+    $stock = (int)get_post_data('stock');
     $comment = get_post_data('comment');
-    $status = get_post_data('status');
+    $status = (int)get_post_data('status');
     $item_img = get_file_data('item_img');
     
-    
+
     // ①「商品新規登録」時のエラーチェック
     if ($sql_kind === 'insert') {
     
@@ -189,7 +193,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     }
 
-    
     // 上記エラーに１つも該当しない場合、
     if (count($errors) === 0) {
 
@@ -236,7 +239,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // POST送信された場合の処理 終了
 
 // テーブルを結合し、商品一覧表示のために必要な情報を取得
-$items = get_items($db, false);
+$items = get_items($db);
 
-// 商品管理ページテンプレートファイル読み込み
+$token = get_csrf_token();
+
 include_once VIEW_PATH . 'admin_item_view.php';

@@ -1,8 +1,8 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
-require_once MODEL_PATH . 'user.php';
 require_once MODEL_PATH . 'item.php';
+require_once MODEL_PATH . 'user.php';
 
 session_start();
 
@@ -11,15 +11,15 @@ $db = get_db_connect();
 // ログイン中のユーザ情報を取得
 $login_user = get_login_user($db);
 
+// ログイン中のユーザ名を取得
+$login_name = get_session('user_name');
+
 // 管理者としてログインしていない場合、ログインページへ
 if (is_admin($login_user) === false){
-    header('Location: '. LOGIN_URL);
-    exit;
+    redirect_to(LOGIN_URL);
 }
 
 // 登録済みの全ユーザ情報を取得    
 $users = get_all_users($db);
 
-// 商品管理ページテンプレートファイル読み込み
-include_once './view/admin_user_view.php';
-
+include_once VIEW_PATH . 'admin_user_view.php';

@@ -6,10 +6,10 @@ define('IMAGE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/img/' );
 define('IMAGE_PATH', 'img/');
 define('LOGO_PATH', 'img/structure/');
 
-define('DB_HOST', 'mysql');
-define('DB_USER', 'testuser');
-define('DB_PASSWD', 'password');
-define('DB_NAME', 'sample');
+define('DB_HOST', 'localhost');
+define('DB_USER', 'bungu_shop');
+define('DB_PASSWD', 'yZbm120Bl1oWixGM');
+define('DB_NAME', 'bungu_shop');
 define('DB_CHARSET', 'utf8');
 define('DBH_CHARSET', 'SET NAMES utf8mb4');
 define('DSN', 'mysql:dbname='.DB_NAME.';host='.DB_HOST.';charset='.DB_CHARSET);

@@ -1,12 +1,15 @@
 <?php 
-// セッション開始
+require_once './conf/const.php';
+require_once MODEL_PATH . 'common.php';
+require_once MODEL_PATH . 'user.php';
+
 session_start();
 
-// セッション変数からログイン済みか確認
-if (!isset($_SESSION['user_id'])) {
-    // ログインしていない場合、ログインページへリダイレクト
-    header('Location: login.php');
-    exit;
+$db = get_db_connect();
+
+// ログインしていない場合、ログインページへ
+if (is_logined() === false) {
+  redirect_to(LOGIN_URL);
 }
 
 // セッション名取得 ※デフォルトはPHPSESSID
@@ -23,74 +26,4 @@ if (isset($_COOKIE[$session_name])) {
 // セッションIDを無効化
 session_destroy();
 
-?>
-
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <title>ログアウト</title>
-        <meta charset="UTF-8">
-        <style>
-            header {
-                display: flex;
-                height: 70px;
-                border-bottom: 1px solid;
-                background-color: rgb(16,45,40);
-            }
-            
-            .logo {
-                flex: 1;
-                text-align: center;
-            }
-            
-            .welcome {
-                flex: 5;
-                color: white;
-                border-left: 1px solid black;
-                text-align: center;
-            }
-            
-            .logo img {
-                height: 100%;
-            }
-            
-            .welcome p {
-                margin: 12px 0;
-            }
-            
-            
-            h1 {
-                padding: 20px 0;
-                text-align: center;
-            } 
-            
-            p {
-                padding: 10px 0;
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            <a class="logo" href="./login.php">
-                <img src="img/structure/logo1.png">
-            </a>
-            <div class="welcome">
-                <p>Welcome to  " BUNGU ONLINE SHOP " !!</p>
-            </div>
-            <a class="logo" href="#">
-                <img src="img/structure/logo1.png">
-            </a>
-        </header>
-        
-        <h1>ログアウト</h1>
-        <p>
-            ログアウトしました
-            <br>
-            またのご利用をお待ちしております
-        </p>
-        <p>
-            <a href="./login.php">ログインページ</a>
-        </p>
-    </body>
-</html>
+include_once VIEW_PATH . 'logout_view.php';

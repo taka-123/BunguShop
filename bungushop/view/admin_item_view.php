@@ -1,56 +1,11 @@
+<?php header("X-FRAME-OPTIONS: SAMEORIGIN"); ?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
         <meta charset="UTF-8">
         <title>BUNGU SHOP 商品管理ページ</title>
+        <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
         <style>
-            header {
-                display: flex;
-                height: 70px;
-                border-bottom: 1px solid;
-                background-color: rgb(16,45,40);
-            }
-            
-            .logo {
-                flex: 1;
-                text-align: center;
-                border-right: 1px solid black;
-            }
-            
-            .welcome {
-                flex: 4;
-                color: white;
-                text-align: center;
-            }
-
-            .log_out {
-                flex: 1;
-                text-align: center;
-                position: relative;
-                border-left: 1px solid black;
-            }
-            
-            .logo img {
-                height: 100%;
-            }
-            
-            .welcome p {
-                margin: 23px;
-            }
-            
-            .log_out a {
-                display: block;
-                height: 100%;
-                width:100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                line-height: 70px;
-                color: white;
-                text-decoration: none;
-            }
-            
-            
             .register, .change {
                 border-top: solid 1px;
             }
@@ -109,17 +64,7 @@
     </head> 
     
     <body>
-        <header>
-            <a class="logo" href="./admin_item.php">
-                <img src="img/structure/logo1.png">
-            </a>
-            <div class="welcome">
-                <p>管理者専用ページ</p>
-            </div>
-            <div class="log_out">
-                <a href="./logout.php">ログアウト</a>
-            </div>
-        </header>
+        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>
@@ -173,6 +118,7 @@
                 </div>
                 <div>
                     <input type="hidden" name="sql_kind" value="insert">
+                    <input type="hidden" name="token" value="<?php print $token; ?>">
                     <input type="submit" id="insert" value="商品を追加する">
                 </div>
             </form>   
@@ -216,6 +162,8 @@
                             <input class="stock_change" type="text" name="stock" value="<?php print entity_str($item['stock']); ?>">個
                             <input type="hidden" name="sql_kind" value="stock_update">
                             <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="変更">                        
                         </td>
                     </form>
@@ -226,10 +174,12 @@
                             <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
                         <!--現在、公開(1)の場合-->
                         <?php if ($item['status'] === 1) { ?>
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="公開 → 非公開">
                             <input type="hidden" name="status" value="0">
                         <!--現在、非公開(0)の場合-->
                         <?php } else { ?>
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="非公開 → 公開">
                             <input type="hidden" name="status" value="1">
                         <?php } ?>
@@ -238,6 +188,7 @@
                     <!--削除-->
                     <form method="POST">
                         <td>
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
                             <input type="submit" value="削除">
                             <input type="hidden" name="sql_kind" value="delete">
                             <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
