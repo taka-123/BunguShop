@@ -80,7 +80,7 @@ function get_user_by_name($db, $user_name) {
 // ユーザ名未登録またはパスワード不一致の場合、falseを返す。
 function login_as($db, $user_name, $passwd){
     $user = get_user_by_name($db, $user_name);
-    if($user === false || $user['passwd'] !== $passwd){
+    if ($user === false || password_verify($passwd, $user['passwd']) === false) {
         return false;
     }
     set_session('user_id', $user['user_id']);

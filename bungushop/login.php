@@ -54,6 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     // 上記エラーに1つも該当しない場合、
     if (count($errors) === 0) {
+
+        // 入力のパスワードをハッシュ化
+        // $hash = password_hash($passwd, PASSWORD_DEFAULT);
         
         // ログイン認証 成功なら、セッションにユーザID保存
         $user = login_as($db, $user_name, $passwd);

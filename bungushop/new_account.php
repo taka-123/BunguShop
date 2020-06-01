@@ -9,6 +9,9 @@ $db = get_db_connect();
 
 // ログイン中のユーザ名を取得
 $login_name = get_session('user_name');
+if ($login_name === '') {
+    $login_name = 'ゲスト';
+}
 
 // 登録済みの全ユーザ名を取得
 $user_names = get_user_names($db);
@@ -84,10 +87,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 上記エラーに該当しない場合、
     if(count($errors) === 0) {
-        
-        insert_user($db, $user_name, $passwd, $mail, $sex, $birthdate); 
 
-        // 正しいページ遷移判断のためにセッション定義
+        // 入力のパスワードをハッシュ化
+        $hash = password_hash($passwd, PASSWORD_DEFAULT); 
+        
+        insert_user($db, $user_name, $hash, $mail, $sex, $birthdate);
+
+        //正しいページ遷移判断のためにセッション定義
         set_session('permission', 'ok');
         
         redirect_to(COMPLETION_URL);
