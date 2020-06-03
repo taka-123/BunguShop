@@ -34,7 +34,6 @@
             <caption>ユーザ情報一覧</caption>
             <tr>
                 <th>ユーザ名</th>
-                <th>パスワード</th>
                 <th>メールアドレス</th>
                 <th>性別</th>
                 <th>生年月日</th>
@@ -46,11 +45,6 @@
                 <!--ユーザ名-->
                 <td>
                     <?php print entity_str($user['user_name']); ?>
-                </td>
-                <!--パスワード-->
-                <td>
-                    <!-- ハッシュ化されたものを表示 -->
-                    <?php print entity_str($user['passwd']); ?>
                 </td>
                 <!--メールアドレス-->
                 <td>
