@@ -107,7 +107,7 @@
                         <?php print number_format(entity_str($order['total_price'])); ?> 円
                     </td>
                     <!--明細-->
-                    <form method="POST">
+                    <form method="POST" action="./history_detail.php">
                         <td>
                             <input type="hidden" name="order_id" value="<?php print entity_str($order['order_id']); ?>">
                             <input type="hidden" name="token" value="<?php print $token; ?>">
