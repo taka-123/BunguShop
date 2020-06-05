@@ -17,6 +17,9 @@
         </div>
     <?php } ?>
     <div class="nav-item">
+        <a href="<?php print(HISTORY_URL); ?>">購入履歴</a>
+    </div>
+    <div class="nav-item">
         <a href="<?php print(NEW_ACCOUNT_URL); ?>">サインアップ</a>
     </div>
     <div class="nav-item">

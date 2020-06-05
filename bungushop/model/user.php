@@ -106,8 +106,8 @@ function get_login_name($db) {
 }
 
 // ログイン中のユーザ名が、管理者用のユーザ名と一致するか確認
-function is_admin($user) {
-    return $user['user_name'] === USER_NAME_ADMIN;
+function is_admin() {
+    return get_session('user_name') === USER_NAME_ADMIN;
 }
 
 // ユーザ新規登録

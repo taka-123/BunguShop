@@ -20,6 +20,8 @@ define('ADMIN_USER_URL', 'admin_user.php');
 define('CART_URL', 'cart.php');
 define('COMPLETION_URL', 'completion.php');
 define('FINISH_URL', 'finish.php');
+define('HISTORY_URL', 'history.php');
+define('HISTORY_DETAIL_URL', 'history_detail.php');
 define('HOME_URL', 'itemlist.php');
 define('LOGIN_URL', 'login.php');
 define('LOGOUT_URL', 'logout.php');
