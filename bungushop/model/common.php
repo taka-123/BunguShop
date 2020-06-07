@@ -41,9 +41,16 @@ function entity_str($str) {
     return htmlspecialchars($str, ENT_QUOTES, HTML_CHARACTER_SET);
 }
 
+function get_get_data($name){
+    if(isset($_GET[$name]) === true){
+        return $_GET[$name];
+    };
+    return '';
+}
+
 // POST送信データの取得
 function get_post_data($name) {
-    if (isset($_POST[$name]) === TRUE) {
+    if (isset($_POST[$name]) === true) {
         return $_POST[$name];
     }
     return '';
