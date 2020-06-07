@@ -23,6 +23,7 @@ $login_name = get_session('user_name');
 // 初期化
 $refine = '';
 $errors = [];
+$genre_id = 0;
 
 // 正規表現
 $non_num = '/[^0-9]/';  // 「半角数字」以外を含む
@@ -34,8 +35,15 @@ $genres = get_genres($db);
 // ジャンルID一覧取得（エラーチェックの為）
 $genre_ids = get_genre_ids($db);
 
+// GET送信されたソートキーを取得
+$sort_key = get_get_data('sort_key');
+if ($sort_key === ''){
+    // プルダウン未選択なら、新着順
+    $sort_key = NEW_ARRIVAL;
+}
+
 // 全公開設定商品の情報を取得
-$items = get_open_items($db);
+$items = get_open_items($db, $name, $genre_id, $sort_key);
 
 // POST送信時の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -76,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $refine = '[検索条件] 、名前に『' . $name . '』を含む、「' . $genre_name . '」ジャンルの商品';
             }
             
-            $items = get_open_items($db, $name, $genre_id);
+            $items = get_open_items($db, $name, $genre_id, $sort_key);
         
         }
         // エラーがない場合の処理終了   

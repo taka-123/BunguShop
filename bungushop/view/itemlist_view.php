@@ -23,14 +23,25 @@
             }
             
             
-            .serch_form {
+            .text-center {
                 width: 70%;
                 border: 2px solid;
-                padding: 15px 0 5px;
-                margin: 10px auto 20px;
+                padding: 15px 0;
+                margin: 10px auto;
                 text-align: center;
             }
+
+            .text-right {
+                text-align: right;
+                margin-right: 10px;
+            }
             
+            .select {
+                width: 150px;
+                height: 25px;
+                font-size: 15px;
+            }
+
             #insert {
             	font-size: 90%;
             	width: 120px;
@@ -89,8 +100,16 @@
                 text-align: right;
             }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
+        <script>
+            $(function(){
+                $("#sort_select").change(function(){
+                    $("#sort_form").submit();
+                });
+            });
+        </script>
         <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
         <ul class="error">
@@ -107,7 +126,7 @@
         
         <h2>商品検索</h2>
         
-        <div class="serch_form">
+        <div class="text-center">
             <form method="POST">
                 <span>
                     <label for="name">名前:</label>
@@ -115,10 +134,10 @@
                 </span>
                 <span>
                     <label for="genre">ジャンル:</label>
-                    <select name="genre_id" id="genre">
+                    <select name="genre_id" class="select" id="genre">
                     <?php foreach($genres as $genre) { ?>
                         <option value="<?php print $genre['genre_id']; ?>"><?php print $genre['genre_name']; ?></option>
-                    <?php } ?>  
+                    <?php } ?>
                     </select>
                 </span>
                 <!--<span>-->
@@ -131,6 +150,19 @@
                     <input type="submit" id="serch" value="検索">
                 </span>
             </form>   
+        </div>
+
+        <div class="text-right">
+            <form method="GET" action="./itemlist.php" id="sort_form">
+                <select name="sort_key" class="select" id="sort_select">
+                <?php foreach(SORT_TYPES as $key => $sort){ ?>
+                    <!-- 現在のソート条件のものを固定表示('selected') -->
+                    <option <?php if ($sort_key === $key){ print 'selected'; }?> value=<?php print $key; ?>>
+                        <?php print $sort; ?>
+                    </option>
+                <?php } ?>
+                </select>
+            </form>
         </div>
         
         <p class="refine"><?php print entity_str($refine); ?></p>

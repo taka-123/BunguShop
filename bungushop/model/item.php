@@ -4,7 +4,7 @@ require_once MODEL_PATH . 'db.php';
 
 // DB利用
 
-function get_items($db, $is_open = false, $name = '', $genre_id = 0) {
+function get_items($db, $is_open = false, $name = '', $genre_id = 0, $sort_key = NEW_ARRIVAL) {
     $sql = "
         SELECT
             bungu_item_master.item_id,
@@ -46,12 +46,13 @@ function get_items($db, $is_open = false, $name = '', $genre_id = 0) {
         ";
         $params[] = $genre_id;
     }
+    $sql .= SORT_SQLS[$sort_key];
 
     return fetch_all_query($db, $sql, $params);
 }
 
-function get_open_items($db, $name = '', $genre_id = 0) {
-    return get_items($db, true, $name, $genre_id);
+function get_open_items($db, $name = '', $genre_id = 0, $sort_key = NEW_ARRIVAL) {
+    return get_items($db, true, $name, $genre_id, $sort_key);
 }
 
 function get_genres($db) {

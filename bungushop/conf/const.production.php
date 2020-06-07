@@ -31,6 +31,18 @@ define('USER_INFO_URL', 'user_info.php');
 define('MIN_AGE', 20);
 define('MAX_AGE', 100);
 
+define('SORT_TYPES', array(
+    NEW_ARRIVAL => '新着順',
+    LOW_TO_HIGH => '価格の低い順',
+    HIGH_TO_LOW => '価格の高い順'
+));
+
+define('SORT_SQLS', array(
+    NEW_ARRIVAL => 'ORDER BY bungu_item_master.create_datetime DESC',
+    LOW_TO_HIGH => 'ORDER BY bungu_item_master.price',
+    HIGH_TO_LOW => 'ORDER BY bungu_item_master.price DESC'
+));
+
 //管理者用ユーザ名を設定
 define('USER_NAME_ADMIN', 'admin');
 
