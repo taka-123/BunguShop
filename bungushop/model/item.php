@@ -4,7 +4,7 @@ require_once MODEL_PATH . 'db.php';
 
 // DB利用
 
-function get_items($db, $is_open = false, $name = '', $genre_id = 0, $sort_key = NEW_ARRIVAL) {
+function get_items($db, $is_open = false, $name = '', $genre_id = 0, $sort_key = NEW_ARRIVAL, $start_array_num = '') {
     $sql = "
         SELECT
             bungu_item_master.item_id,
@@ -47,12 +47,27 @@ function get_items($db, $is_open = false, $name = '', $genre_id = 0, $sort_key =
         $params[] = $genre_id;
     }
     $sql .= SORT_SQLS[$sort_key];
-
+    if ($start_array_num !== '') {
+        $sql .= "
+            LIMIT ?, ?
+        ";
+        $params[] = $start_array_num;
+        $params[] = MAX_NUM_PER_PAGE;
+    }
     return fetch_all_query($db, $sql, $params);
 }
 
-function get_open_items($db, $name = '', $genre_id = 0, $sort_key = NEW_ARRIVAL) {
-    return get_items($db, true, $name, $genre_id, $sort_key);
+function get_open_items($db, $name = '', $genre_id = 0, $sort_key = NEW_ARRIVAL, $start_array_num = '') {
+    return get_items($db, true, $name, $genre_id, $sort_key, $start_array_num);
+}
+
+function get_open_items_num($db) {
+    $sql = "
+        SELECT COUNT(*)
+        FROM bungu_item_master
+        WHERE status = 1
+    ";
+    return fetchColumn_query($db, $sql);
 }
 
 function get_genres($db) {
