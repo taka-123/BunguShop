@@ -31,6 +31,15 @@
                 text-align: center;
             }
 
+            .search {
+                text-align: center;
+            }
+
+            .search span {
+                margin : 10px;
+            }
+
+
             .text-right {
                 text-align: right;
                 margin-right: 10px;
@@ -41,6 +50,45 @@
                 height: 25px;
                 font-size: 15px;
             }
+            
+            nav {
+                position: relative; 
+                overflow: hidden;
+            }
+
+            .pagination {
+                position: relative;
+                left: 50%;
+                float: left;
+                padding: 0;
+            }
+
+            .page-item {
+                position: relative;
+                left: -50%;
+                float: left;
+                list-style: none;
+                border: 1px solid #5c6b80;
+                margin: 5px;
+                color: rgb(16,45,40);
+            }
+            
+            .active {
+                color: white;
+                background-color: rgb(16,45,40);
+            }
+
+            .page-link {
+                padding: 5px 8px;
+                text-decoration: none;
+                font-size: 1.1em;
+            }
+
+            .item_num {
+                text-align: center;
+                margin-top: 0;
+            }
+
 
             #insert {
             	font-size: 90%;
@@ -66,25 +114,31 @@
                 height: 130px;
                 padding: 20px 15px;
                 margin: 5px 10px;
-                display:flex;
+                display: flex;
             }
             
             span {
                 padding-right: 10px;
             }
             
+            .blank {
+                flex: 1;
+            }
+
             .left {
                 flex: 1;
                 text-align: center;
+                right: 10%;
             }
             
             .left img {
                 height: 100%;
+                max-width: 250px;
             }
             
             .right {
-                flex: 1;
-                text-align: left
+                flex: 2;
+                text-align: left;
             }
             
             .right p {
@@ -126,32 +180,36 @@
         
         <h2>商品検索</h2>
         
+        <!-- 検索機能 -->
         <div class="text-center">
             <form method="POST">
-                <span>
-                    <label for="name">名前:</label>
-                    <input type="text" name="name" id="name">
-                </span>
-                <span>
-                    <label for="genre">ジャンル:</label>
-                    <select name="genre_id" class="select" id="genre">
-                    <?php foreach($genres as $genre) { ?>
-                        <option value="<?php print $genre['genre_id']; ?>"><?php print $genre['genre_name']; ?></option>
-                    <?php } ?>
-                    </select>
-                </span>
-                <!--<span>-->
-                <!--    <label for="price">価格帯:</label>-->
-                <!--    <input type="text" name="price" id="price">-->
-                <!--</span>-->
-                <span class="serch">
-                    <input type="hidden" name="sql_kind" value="serch">
-                    <input type="hidden" name="token" value="<?php print $token; ?>">
-                    <input type="submit" id="serch" value="検索">
-                </span>
+                <div class="search">
+                    <span>
+                        <label for="name">名前:</label>
+                        <input type="text" name="name" id="name">
+                    </span>
+                    <span>
+                        <label for="genre">ジャンル:</label>
+                        <select name="genre_id" class="select" id="genre">
+                        <?php foreach($genres as $genre) { ?>
+                            <option value="<?php print $genre['genre_id']; ?>"><?php print $genre['genre_name']; ?></option>
+                        <?php } ?>
+                        </select>
+                    </span>
+                    <!--<span>-->
+                    <!--    <label for="price">価格帯:</label>-->
+                    <!--    <input type="text" name="price" id="price">-->
+                    <!--</span>-->
+                    <span>
+                        <input type="hidden" name="sql_kind" value="search">
+                        <input type="hidden" name="token" value="<?php print $token; ?>">
+                        <input type="submit" id="search" value="検索">
+                    </span>
+                </div>
             </form>   
         </div>
 
+        <!-- ソート機能 -->
         <div class="text-right">
             <form method="GET" action="./itemlist.php" id="sort_form">
                 <select name="sort_key" class="select" id="sort_select">
@@ -164,8 +222,15 @@
                 </select>
             </form>
         </div>
+
+        <!-- ページネーション -->
+        <?php print_page_link($now_page, $sort_key, $max_page); ?>
+        <p class="item_num">
+            「<?php  print $total_items; ?>件中 <?php print $start_num; ?>-<?php print $finish_num; ?>件目の商品」
+        </p>
+
         
-        <p class="refine"><?php print entity_str($refine); ?></p>
+        <div class="refine"><?php print entity_str($refine); ?></div>
         <!--検索条件に一致する商品が無かった場合の表示-->
         <?php if ($items === []) { ?>
             <p class="empty">条件に一致する商品はありませんでした</p>
@@ -175,6 +240,7 @@
             <!--商品の繰り返し表示開始-->
             <?php foreach ($items as $item) { ?>
             <div class="product">
+                <div class="blank"></div>
                 <div class="left">
                     <img src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>" title="<?php print entity_str($item['comment']); ?>">
                 </div>

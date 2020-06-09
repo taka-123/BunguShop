@@ -31,6 +31,9 @@ define('USER_INFO_URL', 'user_info.php');
 define('MIN_AGE', 20);
 define('MAX_AGE', 100);
 
+// 1ページの最大表示件数
+define('MAX_NUM_PER_PAGE', 5);
+
 define('SORT_TYPES', array(
     NEW_ARRIVAL => '新着順',
     LOW_TO_HIGH => '価格の低い順',

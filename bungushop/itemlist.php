@@ -3,6 +3,7 @@ require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
 require_once MODEL_PATH . 'cart.php';
 require_once MODEL_PATH . 'item.php';
+require_once MODEL_PATH . 'page_link.php';
 require_once MODEL_PATH . 'user.php';
 
 session_start();
@@ -42,8 +43,26 @@ if ($sort_key === ''){
     $sort_key = NEW_ARRIVAL;
 }
 
+// ページネーションのための情報取得
+// 公開商品全件数
+$total_items = get_open_items_num($db);
+// トータルページ数
+$max_page = ceil($total_items / MAX_NUM_PER_PAGE);
+// 現在ページ番号
+$now_page = (int)get_now_page();
+// 開始配列
+$start_array_num = MAX_NUM_PER_PAGE * ($now_page - 1);
+// 開始件数
+$start_num = MAX_NUM_PER_PAGE * ($now_page - 1) + 1;
+// 終了件数
+if (($start_num + MAX_NUM_PER_PAGE - 1) < $total_items) {
+  $finish_num = $start_num + MAX_NUM_PER_PAGE - 1;
+} else {
+  $finish_num = $total_items;
+}
+
 // 全公開設定商品の情報を取得
-$items = get_open_items($db, $name, $genre_id, $sort_key);
+$items = get_open_items($db, $name, $genre_id, $sort_key, $start_array_num);
 
 // POST送信時の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -61,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $amount = (int)get_post_data('amount');
     
     // 「検索」時の処理
-    if ($sql_kind === 'serch') {
+    if ($sql_kind === 'search') {
         
         // 不正入力対処
         if (in_array($genre_id, $genre_ids) === false) {
