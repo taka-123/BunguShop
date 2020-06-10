@@ -46,6 +46,8 @@ define('SORT_SQLS', array(
     HIGH_TO_LOW => 'ORDER BY bungu_item_master.price DESC'
 ));
 
+// ランキング表示件数
+define('RANK_DISPLAY_NUM', 3);
+
 //管理者用ユーザ名を設定
 define('USER_NAME_ADMIN', 'admin');
-
