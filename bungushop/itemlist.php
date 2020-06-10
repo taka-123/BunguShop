@@ -3,6 +3,7 @@ require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
 require_once MODEL_PATH . 'cart.php';
 require_once MODEL_PATH . 'item.php';
+require_once MODEL_PATH . 'order.php';
 require_once MODEL_PATH . 'page_link.php';
 require_once MODEL_PATH . 'user.php';
 
@@ -25,6 +26,7 @@ $login_name = get_session('user_name');
 $refine = '';
 $errors = [];
 $genre_id = 0;
+$rank = 1;
 
 // 正規表現
 $non_num = '/[^0-9]/';  // 「半角数字」以外を含む
@@ -63,6 +65,9 @@ if (($start_num + MAX_NUM_PER_PAGE - 1) < $total_items) {
 
 // 全公開設定商品の情報を取得
 $items = get_open_items($db, $name, $genre_id, $sort_key, $start_array_num);
+
+// 売上数の多い商品の情報を取得
+$popular_items = get_popular_items($db, RANK_DISPLAY_NUM);
 
 // POST送信時の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

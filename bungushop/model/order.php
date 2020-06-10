@@ -139,3 +139,35 @@ function get_order_details($db, $order_id){
     $params = array($order_id);
     return fetch_all_query($db, $sql, $params);
 }
+
+function get_popular_items($db, $rank) {
+    $sql = "
+        SELECT
+            bungu_order_details.item_id,
+            sum(bungu_order_details.quantity),
+            bungu_item_master.name,
+            bungu_item_master.price,
+            bungu_item_master.item_img,
+            bungu_item_master.status,
+            bungu_item_stock.stock
+        FROM
+            bungu_order_details
+        JOIN
+            bungu_item_master
+        ON
+            bungu_order_details.item_id = bungu_item_master.item_id
+        JOIN
+            bungu_item_stock
+        ON
+            bungu_order_details.item_id = bungu_item_stock.item_id
+        WHERE
+            bungu_item_master.status = 1
+        GROUP BY
+            bungu_order_details.item_id
+        ORDER BY
+            sum(bungu_order_details.quantity) DESC
+        LIMIT ?
+    ";
+    $params = array($rank);
+    return fetch_all_query($db, $sql, $params);
+  }
