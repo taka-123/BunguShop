@@ -7,8 +7,8 @@ function get_session($name) {
     return '';
 }
 
+// Cookie情報からユーザ名を取得
 function get_cookie($name) {
-    // Cookie情報からユーザ名を取得
     if (isset($_COOKIE[$name])) {
         return $_COOKIE[$name];
     } 
@@ -41,9 +41,26 @@ function entity_str($str) {
     return htmlspecialchars($str, ENT_QUOTES, HTML_CHARACTER_SET);
 }
 
+// GET送信データの取得
+function get_get_data($name){
+    if (isset($_GET[$name]) === true){
+        return $_GET[$name];
+    };
+    return '';
+}
+
+// GET送信のページ番号(=現在ページ)を取得、未送信なら1
+function get_now_page(){
+    if (!isset($_GET['page_id'])){
+        return 1;
+    }else{
+        return $_GET['page_id'];
+    }
+  }
+
 // POST送信データの取得
 function get_post_data($name) {
-    if (isset($_POST[$name]) === TRUE) {
+    if (isset($_POST[$name]) === true) {
         return $_POST[$name];
     }
     return '';

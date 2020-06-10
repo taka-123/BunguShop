@@ -21,6 +21,11 @@ $errors = [];
 // 入力データがPOSTで送信された場合の処理開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
+    
     $user_name = get_post_data('user_name');
     $passwd = get_post_data('passwd');
     $cookie_check = get_post_data('cookie_check');
@@ -73,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 //POST送信時の処理終了
 
-
+$token = get_csrf_token();
 
 // ログインページテンプレートファイル読み込み
 include_once VIEW_PATH . 'login_view.php';

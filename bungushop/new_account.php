@@ -9,6 +9,9 @@ $db = get_db_connect();
 
 // ログイン中のユーザ名を取得
 $login_name = get_session('user_name');
+if ($login_name === '') {
+    $login_name = 'ゲスト';
+}
 
 // 登録済みの全ユーザ名を取得
 $user_names = get_user_names($db);
@@ -26,6 +29,11 @@ $non_alphanum = '/[^a-zA-Z0-9]/';  // 「半角英数字」以外を含む
 // 入力データがPOSTで送信された場合の処理開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
+
     $user_name = get_post_data('user_name');
     $passwd = get_post_data('passwd');
     $mail = get_post_data('mail');
@@ -79,10 +87,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // 上記エラーに該当しない場合、
     if(count($errors) === 0) {
-        
-        insert_user($db, $user_name, $passwd, $mail, $sex, $birthdate); 
 
-        // 正しいページ遷移判断のためにセッション定義
+        // 入力のパスワードをハッシュ化
+        $hash = password_hash($passwd, PASSWORD_DEFAULT); 
+        
+        insert_user($db, $user_name, $hash, $mail, $sex, $birthdate);
+
+        //正しいページ遷移判断のためにセッション定義
         set_session('permission', 'ok');
         
         redirect_to(COMPLETION_URL);
@@ -91,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 // POST送信時の処理終了
 
+$token = get_csrf_token();
 
 // ユーザ登録ページテンプレートファイル読み込み
 include_once VIEW_PATH . 'new_account_view.php';

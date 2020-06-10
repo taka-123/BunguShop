@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
         <style>
-            h1 {
+            h1, p {
                 padding: 10px 0;
                 text-align: center;
             }
@@ -128,9 +128,7 @@
             </div>
         <?php } ?>
         <!--商品の繰り返し表示終了-->
-        
-                
 
-
+        <p><a href="./history.php">購入履歴ページへ</a></p>
     </body>
 </html>

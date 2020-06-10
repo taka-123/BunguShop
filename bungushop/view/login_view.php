@@ -1,3 +1,4 @@
+<?php header("X-FRAME-OPTIONS: SAMEORIGIN"); ?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -101,6 +102,7 @@
                     <input type="checkbox" name="cookie_check" value="checked">次回からユーザ名の入力を省略
                 </li>
             </ul>
+            <input type="hidden" name="token" value="<?php print $token; ?>">
             <input type=submit value="ログイン">
         </form>
 

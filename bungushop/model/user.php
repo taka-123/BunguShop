@@ -80,7 +80,7 @@ function get_user_by_name($db, $user_name) {
 // ユーザ名未登録またはパスワード不一致の場合、falseを返す。
 function login_as($db, $user_name, $passwd){
     $user = get_user_by_name($db, $user_name);
-    if($user === false || $user['passwd'] !== $passwd){
+    if ($user === false || password_verify($passwd, $user['passwd']) === false) {
         return false;
     }
     set_session('user_id', $user['user_id']);
@@ -106,8 +106,8 @@ function get_login_name($db) {
 }
 
 // ログイン中のユーザ名が、管理者用のユーザ名と一致するか確認
-function is_admin($user) {
-    return $user['user_name'] === USER_NAME_ADMIN;
+function is_admin() {
+    return get_session('user_name') === USER_NAME_ADMIN;
 }
 
 // ユーザ新規登録

@@ -8,21 +8,16 @@ session_start();
 
 $db = get_db_connect();
 
-// ログイン中のユーザ情報を取得
-$login_user = get_login_user($db);
-
 // ログイン中のユーザ名を取得
 $login_name = get_session('user_name');
 
 // 管理者としてログインしていない場合、ログインページへ
-if (is_admin($login_user) === false){
+if (is_admin() === false){
     redirect_to(LOGIN_URL);
 }
 
 // 初期化
-$sql_kind = '';
 $errors = [];
-$data = [];
 
 // ジャンル一覧取得
 $genres = get_genres($db);
@@ -34,7 +29,12 @@ $zero_start = '/\A[0][0-9]+\z/'; // 0から始まる数字 08,023,006など
 // POST送信された場合の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // 各種送信データ取得    
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
+    
+    // 各種送信データ取得
     $sql_kind = get_post_data('sql_kind');
     $item_id = (int)get_post_data('item_id');
     $name = get_post_data('name');
@@ -44,7 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $comment = get_post_data('comment');
     $status = (int)get_post_data('status');
     $item_img = get_file_data('item_img');
-     
+    
+
     // ①「商品新規登録」時のエラーチェック
     if ($sql_kind === 'insert') {
     
@@ -236,5 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // テーブルを結合し、商品一覧表示のために必要な情報を取得
 $items = get_items($db);
+
+$token = get_csrf_token();
 
 include_once VIEW_PATH . 'admin_item_view.php';

@@ -1,3 +1,4 @@
+<?php header("X-FRAME-OPTIONS: SAMEORIGIN"); ?>
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -97,6 +98,7 @@
                 <dt><label for="mail">メールアドレス :</label></dt>
                 <dd class="mail_change">
                     <input type="mail" name="mail" id="mail" class="text" value="<?php print $user['mail']; ?>" required>
+                    <input type="hidden" name="token" value="<?php print $token; ?>">
                     <input type="submit" value="変更"> 
                 </dd>
 

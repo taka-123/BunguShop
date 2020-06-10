@@ -54,3 +54,120 @@ function regist_order($db, $carts, $user_id) {
         return false;
     }
 }
+
+function get_all_orders($db) {
+    return get_user_orders($db, false);
+}
+
+function get_user_orders($db, $user_id = false) {
+    $params = [];
+    $sql = "
+        SELECT
+            bungu_orders.order_id,
+            bungu_orders.user_id,
+            bungu_orders.create_datetime,
+            sum(bungu_order_details.purchase_price * bungu_order_details.quantity) AS total_price
+        FROM
+            bungu_orders
+        JOIN
+            bungu_order_details
+        ON
+            bungu_orders.order_id = bungu_order_details.order_id        
+    ";
+    if ($user_id !== false) {
+        $sql .= "WHERE bungu_orders.user_id = ?";
+        $params[] = $user_id;
+    }
+    $sql .= "
+        GROUP BY
+            bungu_orders.order_id
+        ORDER BY
+            bungu_orders.create_datetime DESC
+    ";
+    return fetch_all_query($db, $sql, $params);
+}
+
+function get_all_order_ids($db) {
+    return get_user_order_ids($db, false);
+}
+
+function get_user_order_ids($db, $user_id = false) {
+    $orders = get_user_orders($db, $user_id);
+    foreach ($orders as $order) {
+        $order_ids[] = $order['order_id'];
+    }
+    return $order_ids;
+}
+
+function get_order($db, $order_id) {
+    $sql = "
+        SELECT
+            bungu_orders.order_id,
+            bungu_orders.create_datetime,
+            sum(bungu_order_details.purchase_price * bungu_order_details.quantity) AS total_price
+        FROM
+            bungu_orders
+        JOIN
+            bungu_order_details
+        ON
+            bungu_orders.order_id = bungu_order_details.order_id
+            WHERE bungu_orders.order_id = ?
+        GROUP BY
+            bungu_orders.order_id
+    ";
+    $params = array($order_id);
+    return fetch_query($db, $sql, $params);
+}
+
+function get_order_details($db, $order_id){
+    $sql = "
+        SELECT
+            bungu_item_master.name,
+            bungu_item_master.item_img,
+            bungu_order_details.purchase_price,
+            bungu_order_details.quantity,
+            bungu_order_details.purchase_price * bungu_order_details.quantity AS sub_total
+        FROM
+            bungu_order_details
+        JOIN
+            bungu_item_master
+        ON
+            bungu_order_details.item_id = bungu_item_master.item_id
+        WHERE
+            bungu_order_details.order_id = ?
+    ";
+    $params = array($order_id);
+    return fetch_all_query($db, $sql, $params);
+}
+
+function get_popular_items($db, $rank) {
+    $sql = "
+        SELECT
+            bungu_order_details.item_id,
+            sum(bungu_order_details.quantity),
+            bungu_item_master.name,
+            bungu_item_master.price,
+            bungu_item_master.item_img,
+            bungu_item_master.status,
+            bungu_item_stock.stock
+        FROM
+            bungu_order_details
+        JOIN
+            bungu_item_master
+        ON
+            bungu_order_details.item_id = bungu_item_master.item_id
+        JOIN
+            bungu_item_stock
+        ON
+            bungu_order_details.item_id = bungu_item_stock.item_id
+        WHERE
+            bungu_item_master.status = 1
+        GROUP BY
+            bungu_order_details.item_id
+        ORDER BY
+            sum(bungu_order_details.quantity) DESC
+        LIMIT ?
+    ";
+    $params = array($rank);
+    return fetch_all_query($db, $sql, $params);
+  }

@@ -3,6 +3,8 @@ require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
 require_once MODEL_PATH . 'cart.php';
 require_once MODEL_PATH . 'item.php';
+require_once MODEL_PATH . 'order.php';
+require_once MODEL_PATH . 'page_link.php';
 require_once MODEL_PATH . 'user.php';
 
 session_start();
@@ -23,6 +25,8 @@ $login_name = get_session('user_name');
 // 初期化
 $refine = '';
 $errors = [];
+$genre_id = 0;
+$rank = 1;
 
 // 正規表現
 $non_num = '/[^0-9]/';  // 「半角数字」以外を含む
@@ -34,11 +38,44 @@ $genres = get_genres($db);
 // ジャンルID一覧取得（エラーチェックの為）
 $genre_ids = get_genre_ids($db);
 
+// GET送信されたソートキーを取得
+$sort_key = get_get_data('sort_key');
+if ($sort_key === ''){
+    // プルダウン未選択なら、新着順
+    $sort_key = NEW_ARRIVAL;
+}
+
+// ページネーションのための情報取得
+// 公開商品全件数
+$total_items = get_open_items_num($db);
+// トータルページ数
+$max_page = ceil($total_items / MAX_NUM_PER_PAGE);
+// 現在ページ番号
+$now_page = (int)get_now_page();
+// 開始配列
+$start_array_num = MAX_NUM_PER_PAGE * ($now_page - 1);
+// 開始件数
+$start_num = MAX_NUM_PER_PAGE * ($now_page - 1) + 1;
+// 終了件数
+if (($start_num + MAX_NUM_PER_PAGE - 1) < $total_items) {
+  $finish_num = $start_num + MAX_NUM_PER_PAGE - 1;
+} else {
+  $finish_num = $total_items;
+}
+
 // 全公開設定商品の情報を取得
-$items = get_open_items($db);
+$items = get_open_items($db, $name, $genre_id, $sort_key, $start_array_num);
+
+// 売上数の多い商品の情報を取得
+$popular_items = get_popular_items($db, RANK_DISPLAY_NUM);
 
 // POST送信時の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $token = get_post_data('token');
+    if (is_valid_csrf_token($token) === false) {
+        $errors[] = '不正な操作です';
+    }
     
     $sql_kind = get_post_data('sql_kind');
     $item_id = (int)get_post_data('item_id');
@@ -48,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $amount = (int)get_post_data('amount');
     
     // 「検索」時の処理
-    if ($sql_kind === 'serch') {
+    if ($sql_kind === 'search') {
         
         // 不正入力対処
         if (in_array($genre_id, $genre_ids) === false) {
@@ -71,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $refine = '[検索条件] 、名前に『' . $name . '』を含む、「' . $genre_name . '」ジャンルの商品';
             }
             
-            $items = get_open_items($db, $name, $genre_id);
+            $items = get_open_items($db, $name, $genre_id, $sort_key);
         
         }
         // エラーがない場合の処理終了   
@@ -131,5 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // カート内購入予定数合計取得
 $total_amount = get_total_amount($db, $user_id);
+
+$token = get_csrf_token();
 
 include_once VIEW_PATH . 'itemlist_view.php';
