@@ -7,12 +7,10 @@
         <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
         <style>
             h1 {
-                padding: 20px 0;
                 text-align: center;
             }
             
             h2 {
-                margin: 0;
                 text-align: center;
             }
             
@@ -153,6 +151,47 @@
                 width: 45px;
                 text-align: right;
             }
+
+            .card-deck {
+                position: relative; 
+                overflow: hidden;
+                width: 100%;
+            }
+
+            .card {
+                position: relative;
+                float: left;
+                height: 100%;
+                width: 25%;
+                text-align: center;
+                border: 1px solid #eee;
+                margin: 0 4%;
+            }
+
+            .rank {
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .card-header {
+                background: #f0faf0;
+                padding: 5px;
+            }
+
+            .card-body {
+                padding: 10px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .card-body p {
+                margin: 5px;
+            }
+
+            .card-img {
+                height: 120px;
+
+            }
         </style>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
@@ -247,7 +286,7 @@
                 <div class="right">
                     <p>商品名: <?php print entity_str($item['name']); ?></p>
                     <p>ジャンル: <?php print entity_str($item['genre_name']); ?></p>
-                    <p>¥ <?php print entity_str($item['price']); ?></p>
+                    <p>¥ <?php print number_format(entity_str($item['price'])); ?></p>
                     <p>
                         <?php if ($item['stock'] === 0) { ?>
                             <span class="sold_out">売り切れ</span>
@@ -267,5 +306,36 @@
             <!--商品の繰り返し表示終了-->
         <?php } ?>
         <!--検索条件に一致する商品が有った場合の表示終了-->
+
+        <!-- 人気ランキング -->
+        <h2 class="ranking">人気ランキング</h2>
+
+        <div class="card-deck">
+        <?php foreach ($popular_items as $popular_item) { ?>
+            <div class="card">
+                <div class="rank">  
+                    <?php print $rank++ . ' 位'; ?>
+                </div>  
+                <div class="card-header">
+                    <?php print entity_str($popular_item['name']); ?>
+                </div>
+                <div class="card-body">
+                    <img class="card-img" src="<?php print(IMAGE_PATH . $popular_item['item_img']); ?>">
+                    <p>¥ <?php print number_format(entity_str($popular_item['price'])); ?></p>
+                    <?php if ($item['stock'] === 0) { ?>
+                            <span class="sold_out">売り切れ</span>
+                        <?php } else { ?>
+                        <form method="POST">
+                            <input type="hidden" name="sql_kind" value="cart">
+                            <input type="hidden" name="item_id" value="<?php print entity_str($popular_item['item_id']); ?>">
+                            <input class="add_amount" type="text" name="amount" value=1>個
+                            <input type="hidden" name="token" value="<?php print $token; ?>">
+                            <input type="submit" id="insert" value="カートに追加">
+                        </form>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php } ?>
+        </div>
     </body>
 </html>
