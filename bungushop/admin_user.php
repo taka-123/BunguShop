@@ -8,9 +8,6 @@ session_start();
 
 $db = get_db_connect();
 
-// ログイン中のユーザ名を取得
-$login_name = get_session('user_name');
-
 // 管理者としてログインしていない場合、ログインページへ
 if (is_admin() === false){
     redirect_to(LOGIN_URL);

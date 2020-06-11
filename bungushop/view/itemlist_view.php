@@ -10,6 +10,13 @@
                 text-align: center;
             }
             
+            .note {
+                text-align: center;
+                font-size: 0.9em;
+                margin: 0;
+                color: red;
+            }
+
             h2 {
                 text-align: center;
             }
@@ -203,7 +210,13 @@
                 });
             });
         </script>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php 
+            if (is_logined()) {
+                include VIEW_PATH . 'templates/header_logined.php';
+            } else {  
+                include VIEW_PATH . 'templates/header.php';
+            }
+        ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>
@@ -215,6 +228,10 @@
         
         <h1>商品紹介</h1>
         
+        <?php if (is_logined() === false) { ?>
+            <p class="note">※カートに追加するには、<a href="./login.php">ログイン</a>が必要です</p>
+        <?php } ?>
+
         <!--<h2>あなたへのおすすめ文具</h2>-->
         
         <h2>商品検索</h2>

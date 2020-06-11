@@ -11,16 +11,8 @@ session_start();
 
 $db = get_db_connect();
 
-// ログインしていない場合、ログインページへ
-if (is_logined() === false) {
-    redirect_to(LOGIN_URL);
-}
-
 // ログイン中のユーザIDを取得
 $user_id = (int)get_session('user_id');
-
-// ログイン中のユーザ名を取得
-$login_name = get_session('user_name');
 
 // 初期化
 $refine = '';
@@ -82,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = get_post_data('name');
     $genre_id = (int)get_post_data('genre_id');
     $genre_name = get_genre_name($db, $genre_id);
-    $amount = (int)get_post_data('amount');
+    $amount = get_post_data('amount');
     
     // 「検索」時の処理
     if ($sql_kind === 'search') {
@@ -120,8 +112,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($sql_kind === 'cart') {
         
         // 「追加数量」について
+        // ログインしていない場合、
+        if (is_guest()) {
+            $errors[] = '「ログイン」してください';
+        }
         // 未入力の場合
-        if ($amount === '') {
+        elseif ($amount === '') {
             $errors[] = '「追加数量」を入力してください'; 
         }
         // 半角数字以外を入力した場合
