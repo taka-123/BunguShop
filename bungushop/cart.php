@@ -17,9 +17,6 @@ if (is_logined() === false) {
 // ログイン中のユーザIDを取得
 $user_id = (int)get_session('user_id');
 
-// ログイン中のユーザ名を取得
-$login_name = get_session('user_name');
-
 // 初期化
 $errors = [];
 
@@ -39,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql_kind = get_post_data('sql_kind');
     $cart_id = (int)get_post_data('cart_id');
     $item_id = (int)get_post_data('item_id');
-    $amount = (int)get_post_data('amount');
+    $amount = get_post_data('amount');
     
     // ①在庫数変更時の処理開始
     if ($sql_kind === 'amount_update') {
