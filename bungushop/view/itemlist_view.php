@@ -210,13 +210,7 @@
                 });
             });
         </script>
-        <?php 
-            if (is_logined()) {
-                include VIEW_PATH . 'templates/header_logined.php';
-            } else {  
-                include VIEW_PATH . 'templates/header.php';
-            }
-        ?>
+        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>

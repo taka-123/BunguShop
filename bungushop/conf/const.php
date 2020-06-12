@@ -49,7 +49,7 @@ define('SORT_SQLS', array(
 // ランキング表示件数
 define('RANK_DISPLAY_NUM', 3);
 
-// 管理者用ユーザ名を設定
+//管理者用ユーザ名を設定
 define('USER_NAME_ADMIN', 'admin');
 // ゲスト用の表示ユーザ名
 define('USER_NAME_GUEST', 'ゲスト');
