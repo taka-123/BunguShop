@@ -56,7 +56,7 @@ function get_now_page(){
     }else{
         return $_GET['page_id'];
     }
-  }
+}
 
 // POST送信データの取得
 function get_post_data($name) {

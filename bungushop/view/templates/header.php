@@ -1,6 +1,6 @@
 <header>
     <a class="logo" href="<?php print(HOME_URL) ?>">
-        <img src="<?php print(LOGO_PATH .  "logo1.png"); ?>">
+        <img src="<?php print(STRUCTURE_PATH .  "logo1.png"); ?>">
     </a>
     <div class="welcome">
         <p>Welcome　to　BUNGU SHOP ！!</p>

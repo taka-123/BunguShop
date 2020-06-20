@@ -17,7 +17,8 @@ $user_id = (int)get_session('user_id');
 // 初期化
 $refine = '';
 $errors = [];
-$genre_id = 0;
+$name = '';
+$page_id = 1;
 $rank = 1;
 
 // 正規表現
@@ -30,40 +31,48 @@ $genres = get_genres($db);
 // ジャンルID一覧取得（エラーチェックの為）
 $genre_ids = get_genre_ids($db);
 
-// GET送信されたソートキーを取得
+// GET送信データの取得
+// 商品名
+$name = get_get_data('name');
+// ジャンル（未選択なら0→全て）
+$genre_id = (int)get_get_data('genre_id');
+// ソート（未選択ならNEW_ARRIVAL→新着順）
 $sort_key = get_get_data('sort_key');
 if ($sort_key === ''){
-    // プルダウン未選択なら、新着順
     $sort_key = NEW_ARRIVAL;
+}
+
+// GET送信されたジャンルIDから、ジャンル名を取得
+$genre_name = get_genre_name($db, $genre_id);
+
+if ($name !== '') {
+    $refine = '商品名：『' . $name . '』を含む';
+}
+if ($genre_id !== 0) {
+    $refine = 'ジャンル：「' . $genre_name . '」';
 }
 
 // ページネーションのための情報取得
 // 公開商品全件数
-$total_items = get_open_items_num($db);
+$total_items = get_open_items_num($db, $name, $genre_id);
 // トータルページ数
 $max_page = ceil($total_items / MAX_NUM_PER_PAGE);
 // 現在ページ番号
-$now_page = (int)get_now_page();
+$page_id = (int)get_now_page();
 // 開始配列
-$start_array_num = MAX_NUM_PER_PAGE * ($now_page - 1);
+$start_array_num = MAX_NUM_PER_PAGE * ($page_id - 1);
 // 開始件数
-$start_num = MAX_NUM_PER_PAGE * ($now_page - 1) + 1;
+$start_num = MAX_NUM_PER_PAGE * ($page_id - 1) + 1;
 // 終了件数
 if (($start_num + MAX_NUM_PER_PAGE - 1) < $total_items) {
-  $finish_num = $start_num + MAX_NUM_PER_PAGE - 1;
+    $finish_num = $start_num + MAX_NUM_PER_PAGE - 1;
 } else {
-  $finish_num = $total_items;
+    $finish_num = $total_items;
 }
-
-// 全公開設定商品の情報を取得
-$items = get_open_items($db, $name, $genre_id, $sort_key, $start_array_num);
-
-// 売上数の多い商品の情報を取得
-$popular_items = get_popular_items($db, RANK_DISPLAY_NUM);
 
 // POST送信時の処理 開始
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+    
     $token = get_post_data('token');
     if (is_valid_csrf_token($token) === false) {
         $errors[] = '不正な操作です';
@@ -71,42 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $sql_kind = get_post_data('sql_kind');
     $item_id = (int)get_post_data('item_id');
-    $name = get_post_data('name');
-    $genre_id = (int)get_post_data('genre_id');
-    $genre_name = get_genre_name($db, $genre_id);
-    $amount = get_post_data('amount');
-    
-    // 「検索」時の処理
-    if ($sql_kind === 'search') {
-        
-        // 不正入力対処
-        if (in_array($genre_id, $genre_ids) === false) {
-            $errors[] = '「ジャンル」は選択肢の中から正しく選んでください';
-        }        
-        
-        // 上記エラーに該当しない場合、
-        if (count($errors) === 0) {
-            
-            if ($name === '' && $genre_id === 0) {
-                $refine = '[検索条件] 全商品';
-            }
-            if ($name !== '' && $genre_id === 0) {
-                $refine = '[検索条件] 名前に『' . $name . '』を含む商品';
-            }
-            if ($name === '' && $genre_id !== 0) {
-                $refine = '[検索条件] 「' . $genre_name . '」ジャンルの商品';
-            }
-            if ($name !== '' && $genre_id !== 0) {
-                $refine = '[検索条件] 、名前に『' . $name . '』を含む、「' . $genre_name . '」ジャンルの商品';
-            }
-            
-            $items = get_open_items($db, $name, $genre_id, $sort_key);
-        
-        }
-        // エラーがない場合の処理終了   
-            
-    }
-    // 「検索」時の処理終了
+    $amount = get_post_data('amount');   
     
     // 「カートに追加」時の処理 開始
     if ($sql_kind === 'cart') {
@@ -161,6 +135,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 }
 // POST送信時の処理 終了
+
+
+// 全公開設定商品の情報を取得
+$items = get_open_items($db, $name, $genre_id, $sort_key, $start_array_num);
+
+// 売上数の多い商品の情報を取得
+$popular_items = get_popular_items($db, RANK_DISPLAY_NUM);
 
 // カート内購入予定数合計取得
 $total_amount = get_total_amount($db, $user_id);
