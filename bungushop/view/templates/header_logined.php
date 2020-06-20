@@ -1,6 +1,6 @@
 <header>
     <a class="logo" href="<?php print(HOME_URL) ?>">
-        <img src="<?php print(LOGO_PATH .  "logo1.png"); ?>">
+        <img src="<?php print(STRUCTURE_PATH .  "logo1.png"); ?>">
     </a>
     <div class="welcome">
         <p>ようこそ、 <a href="<?php print(USER_INFO_URL) ?>"><?php print entity_str(get_login_name()); ?></a> さん！</p>
@@ -15,7 +15,7 @@
     <?php } else { ?>
         <div class="in_cart">
             <a href="<?php print(CART_URL) ?>">
-            <img src="<?php print(LOGO_PATH .  "cart.png"); ?>">
+            <img src="<?php print(STRUCTURE_PATH .  "cart.png"); ?>">
             <?php print $total_amount; ?>
             </a>
         </div>
