@@ -87,7 +87,7 @@
         <h1>ユーザアカウント情報</h1>
         <p><a href="./itemlist.php">商品一覧ページへ</a></p>
         
-        <form method="POST">
+        <form method="POST" onSubmit="return checkSubmit()">
             <dl>
                 <dt>ユ ー ザ 名:</dt>
                 <dd><?php print $user['user_name']; ?></dd>
@@ -109,5 +109,10 @@
                 <dd><?php print $user['birthdate']; ?></dd>
             </dl>
         </form>
+        <script type="text/javascript">
+            function checkSubmit() {
+                return confirm("変更しても良いですか？");
+            }
+        </script>
     </body>
 </html>
