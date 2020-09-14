@@ -1,0 +1,161 @@
+            /* ページネーション用 */
+            nav {
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .pagination {
+                position: relative;
+                left: 50%;
+                float: left;
+            }
+
+            .page-item {
+                position: relative;
+                left: -50%;
+                float: left;
+                list-style: none;
+                border: 1px solid #5c6b80;
+                margin: 6px;
+            }
+            
+            .page-link {
+                display: block;
+                color: rgb(16,45,40);
+                text-decoration: none;
+                font-size: 18px;
+                padding: 2px 8px;
+            }
+            
+            .disabled {
+                color: #ccc;
+            }
+
+            .active {
+                color: white;
+                background-color: rgb(16,45,40);
+            }
+            
+            .item_num {
+                text-align: center;
+            }
+            /* ページネーション用終 */
+
+            
+            .side_menu {
+                flex: 1;
+            }
+
+            .main {
+                flex: 3;
+            }
+
+            .aside {
+                flex: 1; 
+            }
+            
+            .search_style {
+                color: white;
+                background-color: rgb(16,45,40);
+                line-height: 32px;
+                border-radius: 16px;
+                padding-left: 20px
+            }
+            
+            .genre-link {
+                display: block;
+                color: black;
+                font-weight: bold;
+                background-image: url(/bungushop/img/structure/arrow.png);
+                background-repeat: no-repeat;
+                background-position: 20px center;
+                text-decoration: none;
+                line-height: 30px;
+                padding-left: 40px;
+            }
+
+            .refine {
+                text-align: center;
+                color: white;
+                background-color: red;
+                line-height: 32px;
+                width: 400px;
+                border-radius: 16px;
+                margin: 10px auto;
+            }
+            
+            .product {
+                height: 130px;
+                display: flex;
+                border-bottom: 1px solid #ccc;
+            }
+            
+            .insert {
+                font-size: 16px;
+                background-color: orange;
+                width: 130px;
+                border-style: none;
+                border-radius: 5px;
+                margin: 6px 10px;
+            }
+            
+            .left {
+                flex: 1;
+                text-align: center;
+                right: 10%;
+            }
+            
+            .left img {
+                height: 100%;
+                max-width: 250px;
+            }
+            
+            .right {
+                flex: 1;
+                text-align: left;
+            }
+            
+            .right p {
+                margin: 7px 0;
+            }
+            
+            .sold_out {
+                color: red;
+            }
+                        
+            .add_amount {
+                width: 45px;
+                text-align: right;
+            }
+
+            .card-deck {
+                display: flex;
+                width: 100%;
+            }
+
+            .card {
+                flex: 1;
+                text-align: center;
+                border: 1px solid #ccc;
+            }
+
+            .rank {
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .card-header {
+                color: white;
+                background-color: rgb(16,45,40);
+            }
+
+            .card-body {
+                padding: 10px;
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            .card-img {
+                height: 130px;
+                padding: 10px;
+            }

@@ -1,0 +1,16 @@
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+td {
+    height: 40px;
+    padding: 0 10px;
+    text-align: center;
+}
+
+caption {
+    text-align: left;
+    font-size: 1.2em;
+    padding: 10px 0;
+}
