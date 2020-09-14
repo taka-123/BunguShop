@@ -5,75 +5,14 @@
         <title>ログイン画面</title>
         <meta charset="UTF-8">
         <link href="./css/header.css" rel="stylesheet" type="text/css"/>
-        <style>
-            .error {
-                list-style: none;
-                color: red;
-                padding: 0;
-            }
-
-            
-            h1 {
-                padding: 20px 0;
-                text-align: center;
-            } 
-            
-            p {
-                padding: 10px 0;
-                text-align: center;
-            }
-
-            form {
-            	width: 400px;
-            	border:1px solid #ccc;
-                padding: 10px 0;
-            	margin: 10px auto;
-            	background: #f0faf0;
-            	text-align: center;
-            }
-            
-            ul {
-            	padding:0;
-            	margin:0;
-        	}
-        	
-        	li {
-            	list-style:none;
-            	padding: 7px;
-        	}
-            
-            label {
-                display: inline-block;
-                width: 140px;
-                margin: 5px 10px;
-                text-align: right;
-                text-align-last: justify;
-            }
-            
-            input.text {
-            	width: 190px;
-            	padding: 3px 5px;
-            	margin: 0;
-            	border-radius: 3px;
-        	}
-        	
-            .omit {
-                display: block;
-                margin-bottom: 10px;
-                font-size: 0.8em;
-            }
-
-            input[type="submit"] {
-            	font-size: 100%;
-            	font-weight: bold;
-            	width: 140px;
-                background-color: orange;
-            	padding: 7px 0;
-            	margin: 5px 0;
-            	border-style:none;
-            	border-radius: 5px;
-        	}
-        </style>
+        <link href="./css/guest.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/login.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .special {
+            color: rgb(220, 2, 10);
+            font-size: 0.9rem;
+        }
+    </style>
     </head>
     <body>
         <?php include VIEW_PATH . 'templates/header.php'; ?>
@@ -98,6 +37,9 @@
                     <label for="passwd">パスワード:</label>
                         <input type="password" name="passwd" id="passwd" value="">
                 </li>
+                <!-- ポートフォリオ用特別設定 -->
+                <span class="special">※admin / admin で管理者としてログインできます。<br>（全ページ閲覧可）</span>
+                <!--  -->
                 <li class="omit">
                     <input type="checkbox" name="cookie_check" value="checked">次回からユーザ名の入力を省略
                 </li>

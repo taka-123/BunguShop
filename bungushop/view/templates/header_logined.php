@@ -3,7 +3,7 @@
         <img src="<?php print(STRUCTURE_PATH .  "logo1.png"); ?>">
     </a>
     <div class="welcome">
-        <p>ようこそ、 <a href="<?php print(USER_INFO_URL) ?>"><?php print entity_str(get_login_name()); ?></a> さん！</p>
+        <p>ようこそ！ <a href="<?php print(USER_INFO_URL) ?>"><?php print entity_str(get_login_name()); ?>さん（マイページ）</a></p>
     </div>
     <?php if (is_guest()) { ?>
         <div class="nav-item">

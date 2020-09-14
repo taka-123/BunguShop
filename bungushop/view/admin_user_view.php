@@ -4,24 +4,7 @@
         <meta charset="UTF-8">
         <title>BUNGU SHOP ユーザ管理ページ</title>
         <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
-        <style>
-            table, th, td {
-                border: 1px solid;
-                border-collapse: collapse;
-            }
-            
-            td {
-                height: 40px;
-                padding: 0 10px;
-                text-align: center;
-            }
-            
-            caption {
-                text-align: left;
-                font-size: 1.2em;
-                padding: 10px 0;
-            }
-        </style>
+        <link href="./css/admin_user.css" rel="stylesheet" type="text/css"/>
     </head> 
     
     <body>

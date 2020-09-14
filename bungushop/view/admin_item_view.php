@@ -5,64 +5,8 @@
         <meta charset="UTF-8">
         <title>BUNGU SHOP 商品管理ページ</title>
         <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
-        <style>
-            .register, .change {
-                border-top: solid 1px;
-            }
-            
-            .error {
-                list-style: none;
-                color: red;
-                padding: 0;
-            }
-            
-            label {
-                margin: 5px 10px;
-                width: 120px;
-                display: inline-block;
-                text-align-last: justify;
-            }
-            
-            caption {
-                text-align: left;
-                font-size: 1.2em;
-                padding: 10px 0;
-            }
-            
-            input#insert {
-                display: block;
-                padding: 3px 15px;
-                margin: 10px;
-                font-size: 0.9em;
-                background-color: orange;
-                color: black;
-                border-style: 2px solid black;
-                border-radius: 5px;
-            }
-            
-            
-            table, th, td {
-                border: 1px solid;
-                border-collapse: collapse;
-            }
-            
-            td {
-                height: 100px;
-                text-align: center;
-                padding: 5px;
-            }
-            
-            td img {
-                height: 100%;
-            }
-            
-            .stock_change {
-                width: 45px;
-                text-align: right;
-            }
-        </style>
+        <link href="./css/admin_item.css" rel="stylesheet" type="text/css"/>
     </head> 
-    
     <body>
         <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
