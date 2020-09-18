@@ -1,0 +1,235 @@
+body {
+    background-color: #f0faf0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0 auto; 
+} 
+
+.container {
+    display: flex;
+    flex: 1;
+}
+
+menu {
+    width: 240px;
+}
+
+main {
+    flex: 1;
+}
+
+aside {
+    width: 190px; 
+}
+
+.search_style {
+    color: white;
+    background-color: rgb(16,45,40);
+    line-height: 32px;
+    border-radius: 16px;
+    padding-left: 20px
+}
+
+.genre-link {
+    display: block;
+    color: black;
+    font-weight: bold;
+    background-image: url(/bungushop/img/structure/arrow.png);
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    text-decoration: none;
+    line-height: 30px;
+    padding-left: 40px;
+}
+
+.refine {
+    text-align: center;
+    color: white;
+    background-color: red;
+    line-height: 32px;
+    width: 400px;
+    border-radius: 16px;
+    margin: 10px auto;
+}
+
+.product {
+    height: 160px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.insert {
+    font-size: 16px;
+    background-color: orange;
+    width: 130px;
+    border-style: none;
+    border-radius: 5px;
+    margin: 6px 10px;
+}
+
+.left {
+    flex: 1;
+    text-align: center;
+    right: 10%;
+}
+
+.left img {
+    height: 100%;
+    max-width: 250px;
+}
+
+.right {
+    flex: 1;
+    text-align: left;
+}
+
+.right p {
+    margin: 7px 0;
+}
+
+.sold_out {
+    color: red;
+}
+            
+.add_amount {
+    width: 45px;
+    text-align: right;
+}
+
+.popular_item {
+    height: 430px;
+}
+
+.card-deck {
+    display: flex;
+    width: 100%;
+}
+
+.card {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.rank {
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-header {
+    color: white;
+    background-color: rgb(16,45,40);
+}
+
+.card-body {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.card-img {
+    height: 130px;
+    padding: 10px;
+}
+
+/* ページネーション用 */
+nav {
+    position: relative; 
+    overflow: hidden;
+}
+
+.pagination {
+    position: relative;
+    left: 50%;
+    float: left;
+}
+
+.page-item {
+    position: relative;
+    left: -50%;
+    float: left;
+    list-style: none;
+    border: 1px solid #5c6b80;
+    margin: 6px;
+}
+
+.page-link {
+    display: block;
+    color: rgb(16,45,40);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 2px 8px;
+}
+
+.disabled {
+    color: #ccc;
+}
+
+.active {
+    color: white;
+    background-color: rgb(16,45,40);
+}
+
+.item_num {
+    text-align: center;
+}
+
+
+@media (max-width: 1020px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+        margin: 0 auto;
+    }
+    menu {
+        width: 100%;
+        /* height: 300px; */
+    }
+    .name_search form {
+        height: 30px;
+    }
+    .name {
+        width: 60%;
+        height: 100%;
+        font-size: 20px;
+    }
+    #search {
+        height: 120%;
+        width: 10%;
+        font-size: 16px;
+    }
+    .genre_search ul {
+        display: flex;
+        border-bottom: 1px solid #ccc;
+    }
+    .genre_search li {
+        flex: 1;
+        border-bottom: none;
+        border-left: 1px solid #ccc;
+    }
+    .genre_search li:last-child {
+        border-right: 1px solid #ccc;
+    }
+    .genre-link {
+        background-image: none;
+        padding: 4px;
+        text-align: center;
+    }
+    main {
+        flex: 1;
+    }
+    aside{
+        width: 100%;
+        height: 480px;
+    }
+    aside ul {
+        display: flex;
+    }
+    aside li {
+        flex: 1;
+        margin: 0 !important;
+    }
+}
