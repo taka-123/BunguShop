@@ -3,6 +3,8 @@
     <head>
         <title>ショッピングカート</title>
         <meta charset="UTF-8">
+        <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
+        <link href="./css/style.css" rel="stylesheet" type="text/css"/>
         <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
         <link href="./css/finish.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -20,7 +22,6 @@
             合計金額: <span>¥ <?php print number_format($total_price); ?></span>
         </p>
 
-        <form method="POST">
         <!--商品の繰り返し表示開始-->
         <?php foreach ($carts as $cart) { ?>
             <div class="product">

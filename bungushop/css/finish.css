@@ -9,7 +9,6 @@ h1, p {
 }
 
 .total {
-    color
     font-weight: bold;
     text-align: center;
     font-size: 1.3em;
@@ -24,41 +23,31 @@ h1, p {
     color: red;
 }
 
-.serch_form {
-    border: 2px solid;
-    padding: 10px 15px;
-    margin: 5px 15px;
-}
-
 .product {
     background-color: #f0faf0;
-    height: 130px;
-    padding: 10px 15px;
-    margin: 5px 10px;
-    display:flex;
-}
-
-span {
-    padding-right: 10px;
+    display: flex;
+    height: 200px;
+    max-width: 1000px;
+    margin: auto;
 }
 
 .left {
-    flex: 1;
-    text-align: center
+    width: 60%;
+    max-width: 600px;
+    text-align: center;
 }
 
 .left img {
-    height: 95%;
+    height: 90%;
+    margin: 5px;
 }
 
 .right {
     flex: 1;
-    text-align: left
 }
 
-.right p{
-    margin: 7px 0;
-    text-align: left
+.right p {
+    text-align: left;
 }
 
 .sold_out {
