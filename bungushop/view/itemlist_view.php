@@ -177,7 +177,7 @@
                     <div class="card-body">
                         <img class="card-img" src="<?php print(IMAGE_PATH . $popular_item['item_img']); ?>">
                         <p>¥ <?php print number_format(entity_str($popular_item['price'])); ?></p>
-                        <?php if ($item['stock'] === 0) { ?>
+                        <?php if ($popular_item['stock'] === 0) { ?>
                                 <span class="sold_out">売り切れ</span>
                             <?php } else { ?>
                             <form method="POST">
