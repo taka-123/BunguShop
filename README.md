@@ -26,6 +26,11 @@ docker-compose up -d apache2 mysql phpmyadmin
 * id: sampleuser
 * pass: password
 
+localhost:8888
+* server: testuser
+* id: mysql
+* pass: password
+
 ### dockerの起動・停止
 
 ~/MyDocker/ec_site/lamp_dock ディレクトリに移動し、
