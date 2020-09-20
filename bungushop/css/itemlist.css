@@ -9,18 +9,22 @@ body {
 .container {
     display: flex;
     flex: 1;
+    width: 90%;
+    margin: 6px auto;
 }
 
 menu {
-    width: 240px;
+    width: 230px;
+    margin: 0;
 }
 
 main {
     flex: 1;
+    margin: 0 6px;
 }
 
 aside {
-    width: 190px; 
+    width: 160px; 
 }
 
 .search_style {
@@ -54,7 +58,7 @@ aside {
 }
 
 .product {
-    height: 160px;
+    height: 200px;
     display: flex;
     border-bottom: 1px solid #ccc;
 }
@@ -69,14 +73,15 @@ aside {
 }
 
 .left {
-    flex: 1;
+    width: 46%;
+    min-width: 160px;
     text-align: center;
-    right: 10%;
+    margin: auto 10px auto 0;
 }
 
 .left img {
-    height: 100%;
-    max-width: 250px;
+    max-width: 90%;
+    max-height: 180px;
 }
 
 .right {
@@ -85,7 +90,7 @@ aside {
 }
 
 .right p {
-    margin: 7px 0;
+    margin: 12px 0;
 }
 
 .sold_out {
@@ -99,6 +104,8 @@ aside {
 
 .popular_item {
     height: 430px;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .card-deck {
@@ -186,15 +193,17 @@ nav {
     }
     menu {
         width: 100%;
-        /* height: 300px; */
+    }
+    .name_search, .genre_search {
+        height: 140px;
     }
     .name_search form {
-        height: 30px;
+        height: 50px;
     }
     .name {
         width: 60%;
         height: 100%;
-        font-size: 20px;
+        font-size: 30px;
     }
     #search {
         height: 120%;
@@ -203,10 +212,14 @@ nav {
     }
     .genre_search ul {
         display: flex;
+        height: 46%;
         border-bottom: 1px solid #ccc;
+        background-color: #f0faf0;
     }
     .genre_search li {
         flex: 1;
+        font-size: 18px;
+        padding: 10px 0;
         border-bottom: none;
         border-left: 1px solid #ccc;
     }
@@ -217,10 +230,42 @@ nav {
         background-image: none;
         padding: 4px;
         text-align: center;
+    
     }
     main {
         flex: 1;
     }
+    .product {
+        height: 30em;
+        border-bottom: 2px solid #ccc;
+    }
+    .left {
+        width: 40%;
+    }
+    .left img {
+        width: 90%;
+        max-height: 400px;
+    }
+    .right {
+        font-size: 210%;
+        margin-left: 4%;
+    }
+    .right p {
+        margin: 6% 0;
+    }
+    .right form {
+        padding: 20px 0;
+    }
+    .add_amount {
+        font-size: 130%;
+        width: 18%;
+    }
+    .insert {
+        font-size: 130%;
+        margin-left: 4%;
+        width: 70%;
+    }
+
     aside{
         width: 100%;
         height: 480px;
@@ -231,5 +276,10 @@ nav {
     aside li {
         flex: 1;
         margin: 0 !important;
+    }
+    
+    .popular_item {
+        height: 430px;
+        width: 100%;
     }
 }

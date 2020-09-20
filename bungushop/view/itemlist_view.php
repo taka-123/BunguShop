@@ -27,7 +27,7 @@
         <!-- コンテナ開始 -->
         <div class="container">
             
-            <menu class="bg-white tx-center pd-10 m-6">
+            <menu class="bg-white tx-center pd-10">
                 <!-- 検索機能 -->
                 <h2 class="m-0">商品検索</h2>
                 <div class="name_search pd-10">
@@ -56,7 +56,7 @@
                 </div>
             </menu>
             
-            <main class="bg-white pd-10 m-6">
+            <main class="bg-white pd-10">
                 <?php if (is_logined() === false) { ?>
                     <p class="fz-14 m-0 tx-center red">※カートに追加するには、<a href="./login.php">ログイン</a>が必要です</p>
                 <?php } ?>
@@ -131,10 +131,9 @@
                     </p>
                     <?php print_page_link($page_id, $sort_key, $genre_id, $name, $max_page); ?>
                 <?php } ?>
-
             </main>
 
-            <aside class="bg-white tx-center pd-10 m-6">
+            <aside class="bg-white tx-center pd-10">
                 <div class="my-10">
                     <a href="http://118.27.17.227/veggieshop/index.php">
                         野菜ショップへ
@@ -162,7 +161,7 @@
         <!-- コンテナ終了 -->
 
         <!-- 人気ランキング開始 -->
-        <div class="popular_item bg-white pd-10 m-6">
+        <div class="popular_item bg-white">
             <h2 class="mx-30 my-20">人気ランキング</h2>
 
             <div class="card-deck m-6">
