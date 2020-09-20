@@ -40,7 +40,7 @@ function get_items($db, $is_open = false, $name = '', $genre_id = 0, $sort_key =
         ";
         $params[] = "%" . $name . "%";
     }
-    if ($genre_id !== 0) {
+    if ($genre_id !== 0 || '') {
         $sql .= "
             AND bungu_item_master.genre_id = ?
         ";
@@ -57,17 +57,31 @@ function get_items($db, $is_open = false, $name = '', $genre_id = 0, $sort_key =
     return fetch_all_query($db, $sql, $params);
 }
 
-function get_open_items($db, $name = '', $genre_id = 0, $sort_key = NEW_ARRIVAL, $start_array_num = '') {
+function get_open_items($db, $name, $genre_id, $sort_key, $start_array_num) {
     return get_items($db, true, $name, $genre_id, $sort_key, $start_array_num);
 }
 
-function get_open_items_num($db) {
+function get_open_items_num($db, $name='', $genre_id = 0) {
     $sql = "
-        SELECT COUNT(*)
-        FROM bungu_item_master
+        SELECT
+            COUNT(*)
+        FROM
+            bungu_item_master
         WHERE status = 1
     ";
-    return fetchColumn_query($db, $sql);
+    if ($name !== '') {
+        $sql .= "
+            AND name LIKE ?
+        ";
+        $params[] = "%" . $name . "%";
+    }
+    if ($genre_id !== 0 || '') {
+        $sql .= "
+            AND bungu_item_master.genre_id = ?
+        ";
+        $params[] = $genre_id;
+    }
+    return fetchColumn_query($db, $sql, $params);
 }
 
 function get_genres($db) {

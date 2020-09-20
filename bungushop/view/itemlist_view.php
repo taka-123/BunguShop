@@ -4,208 +4,17 @@
     <head>
         <title>一覧画面</title>
         <meta charset="UTF-8">
+        <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
+        <link href="./css/style.css" rel="stylesheet" type="text/css"/>
         <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
-        <style>
-            h1 {
-                text-align: center;
-            }
-            
-            h2 {
-                text-align: center;
-            }
-            
-            .error {
-                list-style: none;
-                color: red;
-                padding: 0;
-            }
-            
-            
-            .text-center {
-                width: 70%;
-                border: 2px solid;
-                padding: 15px 0;
-                margin: 10px auto;
-                text-align: center;
-            }
-
-            .search {
-                text-align: center;
-            }
-
-            .search span {
-                margin : 10px;
-            }
-
-
-            .text-right {
-                text-align: right;
-                margin-right: 10px;
-            }
-            
-            .select {
-                width: 150px;
-                height: 25px;
-                font-size: 15px;
-            }
-            
-            nav {
-                position: relative; 
-                overflow: hidden;
-            }
-
-            .pagination {
-                position: relative;
-                left: 50%;
-                float: left;
-                padding: 0;
-            }
-
-            .page-item {
-                position: relative;
-                left: -50%;
-                float: left;
-                list-style: none;
-                border: 1px solid #5c6b80;
-                margin: 5px;
-                color: rgb(16,45,40);
-            }
-            
-            .active {
-                color: white;
-                background-color: rgb(16,45,40);
-            }
-
-            .page-link {
-                padding: 5px 8px;
-                text-decoration: none;
-                font-size: 1.1em;
-            }
-
-            .item_num {
-                text-align: center;
-                margin-top: 0;
-            }
-
-
-            #insert {
-            	font-size: 90%;
-            	width: 120px;
-                background-color: orange;
-            	margin: 5px 10px;
-            	border-style:none;
-            	border-radius: 5px;
-        	}
-            
-            .refine {
-                text-align: center;
-            }
-            
-            
-            .empty {
-                text-align: center;
-                color: red;
-            }
-            
-            .product {
-                background: #f0faf0;
-                height: 130px;
-                padding: 20px 15px;
-                margin: 5px 10px;
-                display: flex;
-            }
-            
-            span {
-                padding-right: 10px;
-            }
-            
-            .blank {
-                flex: 1;
-            }
-
-            .left {
-                flex: 1;
-                text-align: center;
-                right: 10%;
-            }
-            
-            .left img {
-                height: 100%;
-                max-width: 250px;
-            }
-            
-            .right {
-                flex: 2;
-                text-align: left;
-            }
-            
-            .right p {
-                margin: 7px 0;
-            }
-            
-            .sold_out {
-                color: red;
-            }
-                        
-            .add_amount {
-                width: 45px;
-                text-align: right;
-            }
-
-            .card-deck {
-                position: relative; 
-                overflow: hidden;
-                width: 100%;
-            }
-
-            .card {
-                position: relative;
-                float: left;
-                height: 100%;
-                width: 25%;
-                text-align: center;
-                border: 1px solid #eee;
-                margin: 0 4%;
-            }
-
-            .rank {
-                font-weight: bold;
-                text-align: center;
-            }
-
-            .card-header {
-                background: #f0faf0;
-                padding: 5px;
-            }
-
-            .card-body {
-                padding: 10px;
-                text-align: center;
-                vertical-align: middle;
-            }
-
-            .card-body p {
-                margin: 5px;
-            }
-
-            .card-img {
-                height: 120px;
-
-            }
-        </style>
+        <link href="./css/itemlist.css" rel="stylesheet" type="text/css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="./js/itemlist.js"></script>
     </head>
     <body>
-        <script>
-            $(function(){
-                $("#sort_select").change(function(){
-                    $("#sort_form").submit();
-                });
-            });
-        </script>
         <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
         
-        <ul class="error">
+        <ul class="no_style red tx-center p-0">
         <?php foreach($errors as $error) { ?>
             <li>
                 <?php print entity_str($error); ?>
@@ -213,129 +22,177 @@
         <?php } ?>
         </ul>
         
-        <h1>商品紹介</h1>
-        
-        <!--<h2>あなたへのおすすめ文具</h2>-->
-        
-        <h2>商品検索</h2>
-        
-        <!-- 検索機能 -->
-        <div class="text-center">
-            <form method="POST">
-                <div class="search">
-                    <span>
-                        <label for="name">名前:</label>
-                        <input type="text" name="name" id="name">
-                    </span>
-                    <span>
-                        <label for="genre">ジャンル:</label>
-                        <select name="genre_id" class="select" id="genre">
-                        <?php foreach($genres as $genre) { ?>
-                            <option value="<?php print $genre['genre_id']; ?>"><?php print $genre['genre_name']; ?></option>
+        <h1 class="tx-center">商品紹介</h1>
+
+        <!-- コンテナ開始 -->
+        <div class="container">
+            
+            <menu class="bg-white tx-center pd-10">
+                <!-- 検索機能 -->
+                <h2 class="m-0">商品検索</h2>
+                <div class="name_search pd-10">
+                    <h3 class="tx-left search_style">商品名から</h3>
+                    <form method="GET" action="./itemlist.php">
+                        <input class="name fz-14" type="text" name="name">
+                        <input type="submit" id="search" value="検索">
+                    </form>
+                </div>
+                <div class="genre_search pd-10">
+                    <h3 class="tx-left search_style">ジャンルから</h3>
+                    <ul class="no_style m-0">
+                    <?php foreach($genres as $genre) { ?>
+                        <li class="pd-6 tx-left bb-dot">
+                            <a class="genre-link" 
+                            href=<?php print itemlist_url(1, NEW_ARRIVAL, $genre['genre_id'], ''); ?>>
+                                <?php if ($genre['genre_id'] === 0) { ?>
+                                    全て
+                                <?php } else { ?>
+                                    <?php print entity_str($genre['genre_name']); ?>
+                                <?php } ?>
+                            </a>
+                        </li>
+                    <?php } ?>
+                    </ul>
+                </div>
+            </menu>
+            
+            <main class="bg-white pd-10">
+                <?php if (is_logined() === false) { ?>
+                    <p class="attention fz-14 m-0 tx-center red">※カートに追加するには、<a href="./login.php">ログイン</a>が必要です</p>
+                <?php } ?>
+
+                <!--<h2>あなたへのおすすめ文具</h2>-->
+                
+                <!-- ソート機能 -->
+                <div class="tx-right">
+                    <form method="GET" action="./itemlist.php" id="sort_form">
+                        <input type="hidden" name="genre_id" value=<?php print $genre_id; ?>>
+                        <input type="hidden" name="name" value=<?php print $name; ?>>
+                        <select name="sort_key" class="fz-16 h-28 w-130" id="sort_select">
+                        <?php foreach(SORT_TYPES as $key => $sort){ ?>
+                            <!-- 現在のソート条件のものを固定表示('selected') -->
+                            <option <?php if ($sort_key === $key){ print 'selected'; }?> value=<?php print $key; ?>>
+                                <?php print $sort; ?>
+                            </option>
                         <?php } ?>
                         </select>
-                    </span>
-                    <!--<span>-->
-                    <!--    <label for="price">価格帯:</label>-->
-                    <!--    <input type="text" name="price" id="price">-->
-                    <!--</span>-->
-                    <span>
-                        <input type="hidden" name="sql_kind" value="search">
-                        <input type="hidden" name="token" value="<?php print $token; ?>">
-                        <input type="submit" id="search" value="検索">
-                    </span>
+                    </form>
                 </div>
-            </form>   
-        </div>
 
-        <!-- ソート機能 -->
-        <div class="text-right">
-            <form method="GET" action="./itemlist.php" id="sort_form">
-                <select name="sort_key" class="select" id="sort_select">
-                <?php foreach(SORT_TYPES as $key => $sort){ ?>
-                    <!-- 現在のソート条件のものを固定表示('selected') -->
-                    <option <?php if ($sort_key === $key){ print 'selected'; }?> value=<?php print $key; ?>>
-                        <?php print $sort; ?>
-                    </option>
-                <?php } ?>
-                </select>
-            </form>
-        </div>
-
-        <!-- ページネーション -->
-        <?php print_page_link($now_page, $sort_key, $max_page); ?>
-        <p class="item_num">
-            「<?php  print $total_items; ?>件中 <?php print $start_num; ?>-<?php print $finish_num; ?>件目の商品」
-        </p>
-
-        
-        <div class="refine"><?php print entity_str($refine); ?></div>
-        <!--検索条件に一致する商品が無かった場合の表示-->
-        <?php if ($items === []) { ?>
-            <p class="empty">条件に一致する商品はありませんでした</p>
-        
-        <!--検索条件に一致する商品が有った場合の表示（初期表示）-->
-        <?php } else { ?>
-            <!--商品の繰り返し表示開始-->
-            <?php foreach ($items as $item) { ?>
-            <div class="product">
-                <div class="blank"></div>
-                <div class="left">
-                    <img src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>" title="<?php print entity_str($item['comment']); ?>">
-                </div>
-                <div class="right">
-                    <p>商品名: <?php print entity_str($item['name']); ?></p>
-                    <p>ジャンル: <?php print entity_str($item['genre_name']); ?></p>
-                    <p>¥ <?php print number_format(entity_str($item['price'])); ?></p>
-                    <p>
-                        <?php if ($item['stock'] === 0) { ?>
-                            <span class="sold_out">売り切れ</span>
-                        <?php } else { ?>
-                        <form method="POST">
-                            <input type="hidden" name="sql_kind" value="cart">
-                            <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
-                            <input class="add_amount" type="text" name="amount" value=1>個
-                            <input type="hidden" name="token" value="<?php print $token; ?>">
-                            <input type="submit" id="insert" value="カートに追加">
-                        </form>
-                        <?php } ?>
+                <!-- ページネーション -->
+                <?php if ($total_items > 0) { ?>
+                    <p class="item_num">
+                        「<?php  print $total_items; ?>件中 <?php print $start_num; ?>-<?php print $finish_num; ?>件目の商品」
                     </p>
-                </div>
-            </div>
-            <?php } ?>
-            <!--商品の繰り返し表示終了-->
-        <?php } ?>
-        <!--検索条件に一致する商品が有った場合の表示終了-->
-
-        <!-- 人気ランキング -->
-        <h2 class="ranking">人気ランキング</h2>
-
-        <div class="card-deck">
-        <?php foreach ($popular_items as $popular_item) { ?>
-            <div class="card">
-                <div class="rank">  
-                    <?php print $rank++ . ' 位'; ?>
-                </div>  
-                <div class="card-header">
-                    <?php print entity_str($popular_item['name']); ?>
-                </div>
-                <div class="card-body">
-                    <img class="card-img" src="<?php print(IMAGE_PATH . $popular_item['item_img']); ?>">
-                    <p>¥ <?php print number_format(entity_str($popular_item['price'])); ?></p>
-                    <?php if ($item['stock'] === 0) { ?>
-                            <span class="sold_out">売り切れ</span>
-                        <?php } else { ?>
-                        <form method="POST">
-                            <input type="hidden" name="sql_kind" value="cart">
-                            <input type="hidden" name="item_id" value="<?php print entity_str($popular_item['item_id']); ?>">
-                            <input class="add_amount" type="text" name="amount" value=1>個
-                            <input type="hidden" name="token" value="<?php print $token; ?>">
-                            <input type="submit" id="insert" value="カートに追加">
-                        </form>
+                    <?php print_page_link($page_id, $sort_key, $genre_id, $name, $max_page); ?>
+                <?php } ?>
+                
+                <div class="refine m-6"><?php print entity_str($refine); ?></div>
+                <!--検索条件に一致する商品が無かった場合の表示-->
+                <?php if ($items === []) { ?>
+                    <p class="tx-center">条件に一致する商品はありませんでした</p>
+                
+                <!--検索条件に一致する商品が有った場合の表示（初期表示）-->
+                <?php } else { ?>
+                    <!--商品の繰り返し表示開始-->
+                    <?php foreach ($items as $item) { ?>
+                    <div class="product pd-10">
+                        <div class="left">
+                            <img src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>" title="<?php print entity_str($item['comment']); ?>">
+                        </div>
+                        <div class="right">
+                            <p>商品名: <?php print entity_str($item['name']); ?></p>
+                            <p>ジャンル: <?php print entity_str($item['genre_name']); ?></p>
+                            <p>¥ <?php print number_format(entity_str($item['price'])); ?></p>
+                            <p>
+                                <?php if ($item['stock'] === 0) { ?>
+                                    <span class="sold_out">売り切れ</span>
+                                <?php } else { ?>
+                                <form method="POST">
+                                    <input type="hidden" name="sql_kind" value="cart">
+                                    <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
+                                    <input class="add_amount" type="text" name="amount" value=1>個
+                                    <input type="hidden" name="token" value="<?php print $token; ?>">
+                                    <input type="submit" class="insert" value="カートに追加">
+                                </form>
+                                <?php } ?>
+                            </p>
+                        </div>
+                    </div>
                     <?php } ?>
+                    <!--商品の繰り返し表示終了-->
+                <?php } ?>
+                <!--検索条件に一致する商品が有った場合の表示終了-->
+
+                <!-- ページネーション -->
+                <?php if ($total_items > 0) { ?>
+                    <p class="item_num">
+                        「<?php  print $total_items; ?>件中 <?php print $start_num; ?>-<?php print $finish_num; ?>件目の商品」
+                    </p>
+                    <?php print_page_link($page_id, $sort_key, $genre_id, $name, $max_page); ?>
+                <?php } ?>
+            </main>
+
+            <aside class="bg-white tx-center pd-10">
+                <div class="my-10">
+                    <a href="http://118.27.17.227/veggieshop/index.php">
+                        野菜ショップへ
+                        <br>
+                        （※Bootstrap使用）
+                    </a>
                 </div>
-            </div>
-        <?php } ?>
+                <ul class="no_style pd-6">
+                    <li class="my-10">
+                        <a href="https://codecamp.jp/">
+                            <img src="<?php print(STRUCTURE_PATH .  "ad1.png"); ?>">
+                        </a>
+                        <p class="fz-14 m-0">お世話になった学習サイトです</p>
+                    </li>
+                    <li class="my-20">
+                        <a href="https://codecamp.jp/">
+                            <img src="<?php print(STRUCTURE_PATH .  "ad2.png"); ?>">
+                        </a>
+                        <p class="fz-14 m-0">素晴らしい講師がいらっしゃいます</p>
+                    </li>
+                </ul>
+            </aside>
+            
         </div>
+        <!-- コンテナ終了 -->
+
+        <!-- 人気ランキング開始 -->
+        <div class="popular_item bg-white">
+            <h2 class="mx-30 my-20">人気ランキング</h2>
+
+            <div class="card-deck">
+            <?php foreach ($popular_items as $popular_item) { ?>
+                <div class="card m-6">
+                    <div class="rank lh-32">  
+                        <?php print $rank++ . ' 位'; ?>
+                    </div>  
+                    <div class="card-header lh-32">
+                        <?php print entity_str($popular_item['name']); ?>
+                    </div>
+                    <div class="card-body">
+                        <img class="card-img" src="<?php print(IMAGE_PATH . $popular_item['item_img']); ?>">
+                        <p class="price">¥ <?php print number_format(entity_str($popular_item['price'])); ?></p>
+                        <?php if ($popular_item['stock'] === 0) { ?>
+                                <span class="sold_out">売り切れ</span>
+                            <?php } else { ?>
+                            <form method="POST">
+                                <input type="hidden" name="sql_kind" value="cart">
+                                <input type="hidden" name="item_id" value="<?php print entity_str($popular_item['item_id']); ?>">
+                                <input class="add_amount" type="text" name="amount" value=1>個
+                                <input type="hidden" name="token" value="<?php print $token; ?>">
+                                <input type="submit" class="insert" value="カートに追加">
+                            </form>
+                        <?php } ?>
+                    </div>
+                </div>
+            <?php } ?>
+            </div>
+        </div>
+        <!-- 人気ランキング終了 -->
+        
     </body>
 </html>

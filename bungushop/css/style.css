@@ -1,0 +1,93 @@
+/* 共通 */
+body {
+    width: 100%;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.no_style {
+    list-style: none;
+    padding: 0;
+}
+
+.fz-14 {
+    font-size: 14px;
+} 
+
+.fz-16 {
+    font-size: 16px;
+} 
+
+.red {
+    color: red;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.bb-dot {
+    border-bottom: 1px dotted #ccc;
+}
+
+.h-28 {
+    height: 28px;
+}
+
+.lh-32 {
+    line-height: 32px;
+}
+
+.w-130 {
+    width: 130px;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.pd-6 {
+    padding: 6px;
+}
+
+.pd-10 {
+    padding: 10px;
+}
+
+.pd-20 {
+    padding: 20px;
+}
+
+.m-0 {
+    margin: 0;
+}
+
+.m-6 {
+    margin: 6px;
+}
+
+.mx-30 {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.my-20 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.tx-center {
+    text-align: center;
+}
+
+.tx-left {
+    text-align: left;
+}
+
+.tx-right {
+    text-align: right;
+}
+
+.flex {
+    display: flex;
+}

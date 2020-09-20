@@ -18,9 +18,6 @@ if (is_logined() === false) {
 // ログイン中のユーザIDを取得
 $user_id = (int)get_session('user_id');
 
-// ログイン中のユーザ名を取得
-$login_name = get_session('user_name');
-
 // 初期化
 $errors = [];
 

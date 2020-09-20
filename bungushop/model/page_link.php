@@ -1,17 +1,22 @@
 <?php
+function itemlist_url($page_id, $sort_key, $genre_id, $name) {
+    $url = 'itemlist.php?page_id='. $page_id . '&sort_key=' . $sort_key . '&genre_id=' . $genre_id. '&name=' . $name;
+    return $url;
+}
+
 
 // ページネーションの表示
-function print_page_link($now_page, $sort_key, $max_page) {
+function print_page_link($page_id, $sort_key, $genre_id, $name, $max_page) {
     // ページネーション
     print('
         <nav>
-            <ul class="pagination">
+            <ul class="pagination p-0 m-0">
     ');
     // 「最初へ」ボタン
-    if($now_page > 1){
+    if($page_id > 1){
         print('
             <li class="page-item">
-                <a class="page-link" href="itemlist.php?page_id=1&sort_key='.$sort_key.'">
+                <a class="page-link" href=' . itemlist_url(1, $sort_key, $genre_id, $name) . '>
                     top
                 </a>
             </li>
@@ -19,18 +24,18 @@ function print_page_link($now_page, $sort_key, $max_page) {
     } else {
         // 現在のページが1ページ目ならリンクを貼らない
         print('
-            <li class="page-item disabled">
-                <a class="page-link">
+            <li class="page-item">
+                <a class="page-link disabled">
                     top	
                 </a>
             </li>
         ');
     }
     // 「前へ」ボタン
-    if($now_page > 1){
+    if($page_id > 1){
         print('
             <li class="page-item">
-                <a class="page-link" href="itemlist.php?page_id='.($now_page - 1).'&sort_key='.$sort_key.'">
+                <a class="page-link" href=' . itemlist_url($page_id-1, $sort_key, $genre_id, $name) . '>
                     &lt;
                 </a>
             </li>
@@ -38,8 +43,8 @@ function print_page_link($now_page, $sort_key, $max_page) {
     } else {
         // 現在のページが1ページ目ならリンクを貼らない
         print('
-            <li class="page-item disabled">
-                <a class="page-link">
+            <li class="page-item">
+                <a class="page-link disabled">
                     &lt;
                 </a>
             </li>
@@ -48,10 +53,10 @@ function print_page_link($now_page, $sort_key, $max_page) {
     // 「ページ番号」の繰り返し表示
     for ($i = 1; $i <= $max_page; $i++) {
         // 表示中のページ番号にはリンクを貼らないよう条件分け
-        if ($i === $now_page) {
+        if ($i === $page_id) {
             print('
-                <li class="page-item active">
-                    <span class="page-link">'
+                <li class="page-item">
+                    <span class="page-link active">'
                         .$i
                     .'</span>
                 </li>
@@ -59,7 +64,7 @@ function print_page_link($now_page, $sort_key, $max_page) {
         } else {
             print('
                 <li class="page-item">
-                    <a class="page-link" href="itemlist.php?page_id='.$i.'&sort_key='.$sort_key.'">'
+                    <a class="page-link" href=' . itemlist_url($i, $sort_key, $genre_id, $name) . '>'
                         .$i
                     .'</a>
                 </li>
@@ -67,10 +72,10 @@ function print_page_link($now_page, $sort_key, $max_page) {
         }
     }
     // 「次へ」ボタン
-    if ($now_page < $max_page) {
+    if ($page_id < $max_page) {
         print('
             <li class="page-item">
-                <a class="page-link" href="itemlist.php?page_id='.($now_page + 1).'&sort_key='.$sort_key.'">
+            <a class="page-link" href=' . itemlist_url($page_id+1, $sort_key, $genre_id, $name) . '>
                     &gt;
                 </a>
             </li>
@@ -78,18 +83,18 @@ function print_page_link($now_page, $sort_key, $max_page) {
     } else {
         // 現在のページが最終ページ目ならリンクを貼らない
         print('
-            <li class="page-item disabled">
-                <a class="page-link">
+            <li class="page-item">
+                <a class="page-link disabled">
                     &gt;
                 </a>
             </li>
         ');
     }
     // 「最後へ」ボタン
-    if ($now_page < $max_page) {
+    if ($page_id < $max_page) {
         print('
             <li class="page-item">
-                <a class="page-link" href="itemlist.php?page_id='.$max_page.'&sort_key='.$sort_key.'">
+            <a class="page-link" href=' . itemlist_url($max_page, $sort_key, $genre_id, $name) . '>
                     last
                 </a>
             </li>
@@ -97,8 +102,8 @@ function print_page_link($now_page, $sort_key, $max_page) {
     } else {
         // 現在のページが最終ページ目ならリンクを貼らない
         print('
-            <li class="page-item disabled">
-                <a class="page-link">
+            <li class="page-item">
+                <a class="page-link disabled">
                     last
                 </a>
             </li>

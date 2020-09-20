@@ -8,7 +8,7 @@ session_start();
 $db = get_db_connect();
 
 // ログインしている場合、商品一覧ページへ
-if (is_logined()){
+if (is_logined()) {
     redirect_to(HOME_URL);
 }
 

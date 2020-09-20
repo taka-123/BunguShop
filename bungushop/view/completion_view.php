@@ -3,21 +3,13 @@
     <head>
         <title>ユーザ登録完了画面</title>
         <meta charset="UTF-8">
-        <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
-        <style>
-            h1 {
-                padding: 20px 0;
-                text-align: center;
-            } 
-            
-            p {
-                padding: 10px 0;
-                text-align: center;
-            }
-        </style>
+        <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
+        <link href="./css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/guest.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php include VIEW_PATH . 'templates/header.php'; ?>
         
         <h1>ユーザ登録完了</h1>
         <p>

@@ -4,75 +4,14 @@
     <head>
         <title>ユーザ新規登録画面</title>
         <meta charset="UTF-8">
-        <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
-        <style>
-            h1 {
-                padding: 20px 0;
-                text-align: center;
-            } 
-            
-            .error {
-                list-style: none;
-                color: red;
-                padding: 0;
-            }
-            
-            p {
-                text-align: center;
-            }
-            
-            
-            form {
-            	width: 400px;
-            	border:1px solid #ccc;
-                padding: 10px 0;
-            	margin: 10px auto;
-            	background: #f0faf0;
-            }
-            
-            ul {
-            	padding:0;
-            	margin:0;
-        	}
-        	
-        	li {
-            	list-style:none;
-            	padding: 7px;
-        	}
-            
-            label {
-                display: inline-block;
-                width: 140px;
-                margin: 5px 10px;
-                text-align: right;
-                text-align-last: justify;
-            }
-            
-            label.select {
-                width: 70px;
-            }
-            
-            input.text {
-            	width: 190px;
-            	padding: 3px 5px;
-            	margin: 0;
-            	border-radius: 3px;
-        	}
-            
-            input[type="submit"] {
-            	font-size: 100%;
-            	font-weight: bold;
-            	width: 140px;
-                background-color: orange;
-            	padding: 7px 0;
-            	margin: 5px 0;
-            	border-style:none;
-            	border-radius: 5px;
-        	}
-        </style>
+        <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
+        <link href="./css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/header.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/guest.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/new_account.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php include VIEW_PATH . 'templates/header.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>

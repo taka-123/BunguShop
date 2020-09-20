@@ -4,7 +4,7 @@ define('MODEL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/model/');
 define('VIEW_PATH', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/view/');
 define('IMAGE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/img/' );
 define('IMAGE_PATH', 'img/');
-define('LOGO_PATH', 'img/structure/');
+define('STRUCTURE_PATH', 'img/structure/');
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'bungu_shop');
@@ -32,7 +32,7 @@ define('MIN_AGE', 20);
 define('MAX_AGE', 100);
 
 // 1ページの最大表示件数
-define('MAX_NUM_PER_PAGE', 5);
+define('MAX_NUM_PER_PAGE', 4);
 
 define('SORT_TYPES', array(
     NEW_ARRIVAL => '新着順',
@@ -46,6 +46,10 @@ define('SORT_SQLS', array(
     HIGH_TO_LOW => 'ORDER BY bungu_item_master.price DESC'
 ));
 
+// ランキング表示件数
+define('RANK_DISPLAY_NUM', 3);
+
 //管理者用ユーザ名を設定
 define('USER_NAME_ADMIN', 'admin');
-
+// ゲスト用の表示ユーザ名
+define('USER_NAME_GUEST', 'ゲスト');

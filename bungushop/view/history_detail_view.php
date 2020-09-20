@@ -3,81 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <title>BUNGU SHOP 購入明細</title>
+        <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
+        <link href="./css/style.css" rel="stylesheet" type="text/css"/>
         <link href="./css/header_logined.css" rel="stylesheet" type="text/css"/>
-        <style>
-            h1, p {
-                text-align: center;
-            } 
-            
-            .error {
-                list-style: none;
-                color: red;
-                padding: 0;
-            }
-            
-            .container {
-                width: 70%;
-                margin: 0 auto;
-            }
-            
-            table {
-                width: 80%;
-                margin: 10px auto;
-            }
-            
-            caption {
-                text-align: center;
-                font-size: 1.2em;
-                padding: 10px 0;
-            }
-            
-            input {
-                display: block;
-                padding: 3px 15px;
-                margin: 0 auto;
-                font-size: 0.9em;
-                background-color: orange;
-                color: black;
-                border-style: 2px solid black;
-                border-radius: 5px;
-            }
-            
-            table, th, td {
-                border: 1px solid;
-                border-collapse: collapse;
-            }
-
-            th {
-                height: 10px;
-                text-align: center;
-                padding: 5px;
-            }
-            
-            td {
-                height: 35px;
-                text-align: center;
-                padding: 5px;
-            }
-
-            .detail td {
-                height: 80px;
-            }
-            
-            td img {
-                height: 100%;
-            }
-
-            .total span {
-                color: red;
-                font-weight: bold;
-                font-size: 1.3rem;
-            }
-
-            .sub_total span {
-                font-weight: bold;
-                font-size: 1.1rem;
-            }
-        </style>
+        <link href="./css/history.css" rel="stylesheet" type="text/css"/>
+        <link href="./css/history_detail.css" rel="stylesheet" type="text/css"/>
     </head> 
     
     <body>

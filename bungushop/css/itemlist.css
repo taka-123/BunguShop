@@ -1,0 +1,295 @@
+body {
+    background-color: #f0faf0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0 auto; 
+} 
+
+.container {
+    display: flex;
+    flex: 1;
+    width: 90%;
+    margin: 6px auto;
+}
+menu {
+    width: 230px;
+    margin: 0;
+}
+.search_style {
+    color: white;
+    background-color: rgb(16,45,40);
+    line-height: 32px;
+    border-radius: 16px;
+    padding-left: 20px
+}
+.genre-link {
+    display: block;
+    color: black;
+    font-weight: bold;
+    background-image: url(/bungushop/img/structure/arrow.png);
+    background-repeat: no-repeat;
+    background-position: 20px center;
+    text-decoration: none;
+    line-height: 30px;
+    padding-left: 40px;
+}
+.refine {
+    text-align: center;
+    color: white;
+    background-color: red;
+    line-height: 32px;
+    width: 400px;
+    border-radius: 16px;
+    margin: 10px auto;
+}
+
+main {
+    flex: 1;
+    margin: 0 6px;
+}
+.product {
+    height: 200px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.insert {
+    font-size: 16px;
+    background-color: orange;
+    width: 130px;
+    border-style: none;
+    border-radius: 5px;
+    margin: 6px 10px;
+}
+
+.left {
+    width: 46%;
+    min-width: 160px;
+    text-align: center;
+    margin: auto 10px auto 0;
+}
+
+.left img {
+    max-width: 90%;
+    max-height: 180px;
+}
+
+.right {
+    flex: 1;
+    text-align: left;
+}
+
+.right p {
+    margin: 12px 0;
+}
+
+.sold_out {
+    color: red;
+}
+            
+.add_amount {
+    width: 45px;
+    text-align: right;
+}
+
+aside {
+    width: 160px; 
+}
+
+.popular_item {
+    height: 430px;
+    width: 90%;
+    margin: 0 auto;
+}
+.card-deck {
+    display: flex;
+    width: 100%;
+}
+.card {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+.rank {
+    font-weight: bold;
+    text-align: center;
+}
+.card-header {
+    color: white;
+    background-color: rgb(16,45,40);
+}
+.card-body {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+.card-img {
+    height: 130px;
+    padding: 10px;
+}
+
+/* ページネーション用 */
+nav {
+    position: relative; 
+    overflow: hidden;
+}
+.pagination {
+    position: relative;
+    left: 50%;
+    float: left;
+}
+.page-item {
+    position: relative;
+    left: -50%;
+    float: left;
+    list-style: none;
+    border: 1px solid #5c6b80;
+    margin: 6px;
+}
+.page-link {
+    display: block;
+    color: rgb(16,45,40);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 2px 8px;
+}
+.disabled {
+    color: #ccc;
+}
+.active {
+    color: white;
+    background-color: rgb(16,45,40);
+}
+.item_num {
+    text-align: center;
+}
+
+
+@media (max-width: 1020px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+    }
+    menu {
+        width: 96%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    .name_search, .genre_search {
+        height: 140px;
+    }
+    .name_search form {
+        height: 50px;
+    }
+    .name {
+        width: 60%;
+        height: 100%;
+        font-size: 30px;
+    }
+    #search {
+        height: 120%;
+        width: 10%;
+        font-size: 16px;
+    }
+    .genre_search ul {
+        display: flex;
+        height: 46%;
+        border-bottom: 1px solid #ccc;
+        background-color: #f0faf0;
+    }
+    .genre_search li {
+        flex: 1;
+        font-size: 18px;
+        padding: 10px 0;
+        border-bottom: none;
+        border-left: 1px solid #ccc;
+    }
+    .genre_search li:last-child {
+        border-right: 1px solid #ccc;
+    }
+    .genre-link {
+        background-image: none;
+        padding: 4px;
+        text-align: center;
+    }
+
+    main {
+        flex: 1;
+        width: 96%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    .attention {
+        font-size: 160%;
+    }
+    #sort_select {
+        height: 60px;
+        width: 22%;
+        font-size: 160%;
+    }
+    .product {
+        height: 30em;
+        border-bottom: 2px solid #ccc;
+    }
+    .left {
+        width: 40%;
+    }
+    .left img {
+        width: 90%;
+        max-height: 400px;
+    }
+    .right {
+        font-size: 210%;
+        margin-left: 4%;
+    }
+    .right p {
+        margin: 6% 0;
+    }
+    .right form {
+        padding: 20px 0;
+    }
+    .add_amount {
+        font-size: 130%;
+        width: 18%;
+    }
+    .insert {
+        font-size: 130%;
+        margin-left: 8%;
+        width: 70%;
+    }
+
+    aside{
+        width: 96%;
+        margin: 0 auto;
+        height: 480px;
+    }
+    aside ul {
+        display: flex;
+    }
+    aside li {
+        flex: 1;
+        margin: 0 !important;
+    }
+    
+    .popular_item {
+        width: 98%;
+        height: 100%;
+        margin: 0 auto;
+        font-size: 130%;
+    }
+    .price {
+        font-size: 130%;
+    }
+
+    /* ページネーション用 */
+    .page-link {
+        font-size: 180%;
+        padding: 12px 24px;
+    }
+    .item_num {
+        font-size: 140%;
+    }
+}

@@ -22,9 +22,6 @@ $order_id = '';
 // ログイン中のユーザIDを取得
 $user_id = (int)get_session('user_id');
 
-// ログイン中のユーザ名を取得
-$login_name = get_session('user_name');
-
 // 購入履歴と注文番号の候補を取得
 if (is_admin()) {
     $order_ids = get_all_order_ids($db);

@@ -18,9 +18,6 @@ if (is_logined() === false) {
 // ログイン中のユーザIDを取得
 $user_id = (int)get_session('user_id');
 
-// ログイン中のユーザ名を取得
-$login_name = get_session('user_name');
-
 // 正しいページ遷移でない場合（直接アクセス）、カートページへリダイレクト
 if (get_session('permission') !== 'ok') {
     redirect_to(CART_URL);

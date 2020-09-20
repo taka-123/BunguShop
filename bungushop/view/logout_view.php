@@ -3,18 +3,10 @@
     <head>
         <title>ログアウト</title>
         <meta charset="UTF-8">
+        <meta name=”viewport” content=”width=device-width,initial-scale=1.0″>
+        <link href="./css/style.css" rel="stylesheet" type="text/css"/>
         <link href="./css/header.css" rel="stylesheet" type="text/css"/>
-        <style>
-            h1 {
-                padding: 20px 0;
-                text-align: center;
-            } 
-            
-            p {
-                padding: 10px 0;
-                text-align: center;
-            }
-        </style>
+        <link href="./css/guest.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <?php include VIEW_PATH . 'templates/header.php'; ?>
