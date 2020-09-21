@@ -58,7 +58,7 @@
             
             <main class="bg-white pd-10">
                 <?php if (is_logined() === false) { ?>
-                    <p class="fz-14 m-0 tx-center red">※カートに追加するには、<a href="./login.php">ログイン</a>が必要です</p>
+                    <p class="attention fz-14 m-0 tx-center red">※カートに追加するには、<a href="./login.php">ログイン</a>が必要です</p>
                 <?php } ?>
 
                 <!--<h2>あなたへのおすすめ文具</h2>-->
@@ -111,7 +111,8 @@
                                 <form method="POST">
                                     <input type="hidden" name="sql_kind" value="cart">
                                     <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
-                                    <input class="add_amount" type="text" name="amount" value=1>個
+                                    <select name="amount" class="add_amount">
+                                    </select>
                                     <input type="hidden" name="token" value="<?php print $token; ?>">
                                     <input type="submit" class="insert" value="カートに追加">
                                 </form>
@@ -164,7 +165,7 @@
         <div class="popular_item bg-white">
             <h2 class="mx-30 my-20">人気ランキング</h2>
 
-            <div class="card-deck m-6">
+            <div class="card-deck">
             <?php foreach ($popular_items as $popular_item) { ?>
                 <div class="card m-6">
                     <div class="rank lh-32">  
@@ -175,14 +176,15 @@
                     </div>
                     <div class="card-body">
                         <img class="card-img" src="<?php print(IMAGE_PATH . $popular_item['item_img']); ?>">
-                        <p>¥ <?php print number_format(entity_str($popular_item['price'])); ?></p>
+                        <p class="price">¥ <?php print number_format(entity_str($popular_item['price'])); ?></p>
                         <?php if ($popular_item['stock'] === 0) { ?>
                                 <span class="sold_out">売り切れ</span>
                             <?php } else { ?>
                             <form method="POST">
                                 <input type="hidden" name="sql_kind" value="cart">
                                 <input type="hidden" name="item_id" value="<?php print entity_str($popular_item['item_id']); ?>">
-                                <input class="add_amount" type="text" name="amount" value=1>個
+                                <select name="amount" class="add_amount">
+                                </select>
                                 <input type="hidden" name="token" value="<?php print $token; ?>">
                                 <input type="submit" class="insert" value="カートに追加">
                             </form>

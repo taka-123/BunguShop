@@ -12,21 +12,10 @@ body {
     width: 90%;
     margin: 6px auto;
 }
-
 menu {
     width: 230px;
     margin: 0;
 }
-
-main {
-    flex: 1;
-    margin: 0 6px;
-}
-
-aside {
-    width: 160px; 
-}
-
 .search_style {
     color: white;
     background-color: rgb(16,45,40);
@@ -34,7 +23,6 @@ aside {
     border-radius: 16px;
     padding-left: 20px
 }
-
 .genre-link {
     display: block;
     color: black;
@@ -46,7 +34,6 @@ aside {
     line-height: 30px;
     padding-left: 40px;
 }
-
 .refine {
     text-align: center;
     color: white;
@@ -57,6 +44,10 @@ aside {
     margin: 10px auto;
 }
 
+main {
+    flex: 1;
+    margin: 0 6px;
+}
 .product {
     height: 200px;
     display: flex;
@@ -98,8 +89,14 @@ aside {
 }
             
 .add_amount {
-    width: 45px;
-    text-align: right;
+    width: 70px;
+    height: 30px;
+    font-size: 18px;
+    padding: 4px 0;
+}
+
+aside {
+    width: 160px; 
 }
 
 .popular_item {
@@ -107,34 +104,28 @@ aside {
     width: 90%;
     margin: 0 auto;
 }
-
 .card-deck {
     display: flex;
     width: 100%;
 }
-
 .card {
     flex: 1;
     text-align: center;
     border: 1px solid #ccc;
 }
-
 .rank {
     font-weight: bold;
     text-align: center;
 }
-
 .card-header {
     color: white;
     background-color: rgb(16,45,40);
 }
-
 .card-body {
     padding: 10px;
     text-align: center;
     vertical-align: middle;
 }
-
 .card-img {
     height: 130px;
     padding: 10px;
@@ -145,13 +136,11 @@ nav {
     position: relative; 
     overflow: hidden;
 }
-
 .pagination {
     position: relative;
     left: 50%;
     float: left;
 }
-
 .page-item {
     position: relative;
     left: -50%;
@@ -160,7 +149,6 @@ nav {
     border: 1px solid #5c6b80;
     margin: 6px;
 }
-
 .page-link {
     display: block;
     color: rgb(16,45,40);
@@ -168,16 +156,13 @@ nav {
     font-size: 18px;
     padding: 2px 8px;
 }
-
 .disabled {
     color: #ccc;
 }
-
 .active {
     color: white;
     background-color: rgb(16,45,40);
 }
-
 .item_num {
     text-align: center;
 }
@@ -189,10 +174,11 @@ nav {
         flex-direction: column;
         width: 100%;
         min-height: 100vh;
-        margin: 0 auto;
     }
     menu {
-        width: 100%;
+        width: 96%;
+        margin: 0 auto;
+        padding: 0;
     }
     .name_search, .genre_search {
         height: 140px;
@@ -230,10 +216,21 @@ nav {
         background-image: none;
         padding: 4px;
         text-align: center;
-    
     }
+
     main {
         flex: 1;
+        width: 96%;
+        margin: 0 auto;
+        padding: 0;
+    }
+    .attention {
+        font-size: 160%;
+    }
+    #sort_select {
+        height: 60px;
+        width: 22%;
+        font-size: 160%;
     }
     .product {
         height: 30em;
@@ -257,17 +254,19 @@ nav {
         padding: 20px 0;
     }
     .add_amount {
-        font-size: 130%;
-        width: 18%;
+        font-size: 120%;
+        width: 30%;
+        height: 120%;
     }
     .insert {
         font-size: 130%;
-        margin-left: 4%;
+        margin-left: 8%;
         width: 70%;
     }
 
     aside{
-        width: 100%;
+        width: 96%;
+        margin: 0 auto;
         height: 480px;
     }
     aside ul {
@@ -279,7 +278,21 @@ nav {
     }
     
     .popular_item {
-        height: 430px;
-        width: 100%;
+        width: 98%;
+        height: 100%;
+        margin: 0 auto;
+        font-size: 130%;
+    }
+    .price {
+        font-size: 130%;
+    }
+
+    /* ページネーション用 */
+    .page-link {
+        font-size: 180%;
+        padding: 12px 24px;
+    }
+    .item_num {
+        font-size: 140%;
     }
 }
