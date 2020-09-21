@@ -89,8 +89,10 @@ main {
 }
             
 .add_amount {
-    width: 45px;
-    text-align: right;
+    width: 70px;
+    height: 30px;
+    font-size: 18px;
+    padding: 4px 0;
 }
 
 aside {
@@ -252,8 +254,9 @@ nav {
         padding: 20px 0;
     }
     .add_amount {
-        font-size: 130%;
-        width: 18%;
+        font-size: 120%;
+        width: 30%;
+        height: 120%;
     }
     .insert {
         font-size: 130%;

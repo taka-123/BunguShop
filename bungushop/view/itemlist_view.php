@@ -111,7 +111,8 @@
                                 <form method="POST">
                                     <input type="hidden" name="sql_kind" value="cart">
                                     <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
-                                    <input class="add_amount" type="text" name="amount" value=1>個
+                                    <select name="amount" class="add_amount">
+                                    </select>
                                     <input type="hidden" name="token" value="<?php print $token; ?>">
                                     <input type="submit" class="insert" value="カートに追加">
                                 </form>
@@ -182,7 +183,8 @@
                             <form method="POST">
                                 <input type="hidden" name="sql_kind" value="cart">
                                 <input type="hidden" name="item_id" value="<?php print entity_str($popular_item['item_id']); ?>">
-                                <input class="add_amount" type="text" name="amount" value=1>個
+                                <select name="amount" class="add_amount">
+                                </select>
                                 <input type="hidden" name="token" value="<?php print $token; ?>">
                                 <input type="submit" class="insert" value="カートに追加">
                             </form>

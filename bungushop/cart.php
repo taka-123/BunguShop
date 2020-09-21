@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $item_id = (int)get_post_data('item_id');
     $amount = get_post_data('amount');
     
-    // ①在庫数変更時の処理開始
+    // ①購入予定数変更時の処理開始
     if ($sql_kind === 'amount_update') {
         
         // 「数量」について
@@ -63,13 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (count($errors) === 0) {
             
             update_cart_amount($db, $amount, $user_id, $item_id);
-            echo '在庫数を更新しました';
+            echo '購入予定数を更新しました';
             
         }
         // エラーが無かった場合の処理終了                
         
     }
-    // ①在庫数変更時の処理終了
+    // ①購入予定数変更時の処理終了
     
     // ②削除ボタン実行時の処理開始
     elseif ($sql_kind === 'delete') {
