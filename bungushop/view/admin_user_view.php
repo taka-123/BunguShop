@@ -10,7 +10,7 @@
     </head> 
     
     <body>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php include VIEW_PATH . 'templates/header_logined_view.php'; ?>
         
         <h1>BUNGU SHOP ユーザ管理ページ</h1>
         <p><a href="./admin_item.php">商品管理ページへ</a></p>

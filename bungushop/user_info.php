@@ -1,6 +1,7 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
+require_once MODEL_PATH . 'cart.php';
 require_once MODEL_PATH . 'user.php';
 
 session_start();
@@ -54,6 +55,9 @@ if ($user['sex'] === 0) {
 if ($user['sex'] === 1) {
     $sex = '女性';
 }
+
+// カート内購入予定数取得
+$total_amount = get_total_amount($db, $user_id);
 
 $token = get_csrf_token();
 

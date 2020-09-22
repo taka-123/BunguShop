@@ -11,7 +11,7 @@
     </head> 
     
     <body>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php include VIEW_PATH . 'templates/header_logined_view.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>

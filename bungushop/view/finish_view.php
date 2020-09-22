@@ -9,7 +9,7 @@
         <link href="./css/finish.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php include VIEW_PATH . 'templates/header_logined_view.php'; ?>
         
         <h1>購入完了</h1>
         <p class="finish">
