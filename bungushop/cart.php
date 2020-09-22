@@ -50,13 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         elseif (preg_match($non_num, $amount)) {
             $errors[] = '「数量」は半角数字で入力してください';
         }
-        // 複数桁の数字で頭が０の場合、
+        // 複数桁の数字で頭が0の場合
         elseif (preg_match($zero_start, $amount)) {
             $errors[] = '「数量」は複数桁の場合、頭は0以外の半角数字にしてください';
         }
-        // 10,000個より多い場合
-        elseif ($amount > 10000) {
-            $errors[] = '「数量」は1万個以下にしてください';
+        // 設定の数字より多くの数量を指定した場合
+        elseif ($amount > MAX_PURCHASE_NUM) {
+            $errors[] = '「数量」は'.number_format(MAX_PURCHASE_NUM).'個以下にしてください';
         }
         
         // 上記エラーに１つも該当しない場合、
