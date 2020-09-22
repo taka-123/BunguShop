@@ -11,7 +11,7 @@
         <link href="./css/new_account.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?php include VIEW_PATH . 'templates/header.php'; ?>
+        <?php include VIEW_PATH . 'templates/header_view.php'; ?>
         
         <ul class="error">
         <?php foreach($errors as $error) { ?>

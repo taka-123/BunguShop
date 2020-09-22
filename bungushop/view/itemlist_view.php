@@ -12,7 +12,7 @@
         <script src="./js/itemlist.js"></script>
     </head>
     <body>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php include VIEW_PATH . 'templates/header_logined_view.php'; ?>
         
         <ul class="no_style red tx-center p-0">
         <?php foreach($errors as $error) { ?>

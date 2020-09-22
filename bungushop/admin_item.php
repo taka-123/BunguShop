@@ -1,6 +1,7 @@
 <?php
 require_once './conf/const.php';
 require_once MODEL_PATH . 'common.php';
+require_once MODEL_PATH . 'cart.php';
 require_once MODEL_PATH . 'item.php';
 require_once MODEL_PATH . 'user.php';
 
@@ -12,6 +13,9 @@ $db = get_db_connect();
 if (is_admin() === false){
     redirect_to(LOGIN_URL);
 }
+
+// ログイン中のユーザIDを取得
+$user_id = (int)get_session('user_id');
 
 // 初期化
 $errors = [];
@@ -236,5 +240,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $items = get_items($db);
 
 $token = get_csrf_token();
+
+// カート内購入予定数取得
+$total_amount = get_total_amount($db, $user_id);
 
 include_once VIEW_PATH . 'admin_item_view.php';
