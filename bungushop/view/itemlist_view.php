@@ -98,7 +98,8 @@
                     <?php foreach ($items as $item) { ?>
                     <div class="product pd-10">
                         <div class="left">
-                            <img src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>" title="<?php print entity_str($item['comment']); ?>">
+                            <img class="productImg" src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>">
+                            <p class="comment_box"><?php print entity_str($item['comment']); ?></p>
                         </div>
                         <div class="right">
                             <p>商品名: <?php print entity_str($item['name']); ?></p>
