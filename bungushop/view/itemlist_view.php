@@ -139,7 +139,7 @@
                 <ul class="no_style pd-6">
                     <li class="my-10">
                         <a href="http://118.27.17.227/veggieshop/index.php">
-                            <img src="<?php print(STRUCTURE_PATH .  "ad1.png"); ?>">
+                            <img src="<?php print(STRUCTURE_PATH .  "veggie.png"); ?>">
                             <span>
                                 野菜ショップへ
                                 <br>
@@ -149,7 +149,7 @@
                     </li>
                     <li class="my-20">
                         <a href="http://118.27.17.227/index.html">
-                            <img src="<?php print(STRUCTURE_PATH .  "ad2.png"); ?>">
+                            <img src="<?php print(STRUCTURE_PATH .  "top.png"); ?>">
                             <span>
                                 ポートフォリオ
                                 <br>
