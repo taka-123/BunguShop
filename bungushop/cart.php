@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $item_id = (int)get_post_data('item_id');
     $amount = get_post_data('amount');
     
-    // ①在庫数変更時の処理開始
+    // ①購入予定数変更時の処理開始
     if ($sql_kind === 'amount_update') {
         
         // 「数量」について
@@ -50,26 +50,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         elseif (preg_match($non_num, $amount)) {
             $errors[] = '「数量」は半角数字で入力してください';
         }
-        // 複数桁の数字で頭が０の場合、
+        // 複数桁の数字で頭が0の場合
         elseif (preg_match($zero_start, $amount)) {
             $errors[] = '「数量」は複数桁の場合、頭は0以外の半角数字にしてください';
         }
-        // 10,000個より多い場合
-        elseif ($amount > 10000) {
-            $errors[] = '「数量」は1万個以下にしてください';
+        // 設定の数字より多くの数量を指定した場合
+        elseif ($amount > MAX_PURCHASE_NUM) {
+            $errors[] = '「数量」は'.number_format(MAX_PURCHASE_NUM).'個以下にしてください';
         }
         
         // 上記エラーに１つも該当しない場合、
         if (count($errors) === 0) {
             
             update_cart_amount($db, $amount, $user_id, $item_id);
-            echo '在庫数を更新しました';
+            echo '購入予定数を更新しました';
             
         }
         // エラーが無かった場合の処理終了                
         
     }
-    // ①在庫数変更時の処理終了
+    // ①購入予定数変更時の処理終了
     
     // ②削除ボタン実行時の処理開始
     elseif ($sql_kind === 'delete') {

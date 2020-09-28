@@ -9,7 +9,7 @@
         <link href="./css/guest.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?php include VIEW_PATH . 'templates/header.php'; ?>
+        <?php include VIEW_PATH . 'templates/header_view.php'; ?>
         
         <h1>ログアウト</h1>
         <p>

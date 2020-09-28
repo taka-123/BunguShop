@@ -1,3 +1,4 @@
+<!-- ローカル用設定 -->
 <?php
 
 define('MODEL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/bungushop/model/');
@@ -28,11 +29,15 @@ define('LOGOUT_URL', 'logout.php');
 define('NEW_ACCOUNT_URL', 'new_account.php');
 define('USER_INFO_URL', 'user_info.php');
 
+// ユーザ登録可能年齢
 define('MIN_AGE', 20);
 define('MAX_AGE', 100);
 
 // 1ページの最大表示件数
 define('MAX_NUM_PER_PAGE', 4);
+
+// 最大購入数量
+define('MAX_PURCHASE_NUM', 100);
 
 define('SORT_TYPES', array(
     NEW_ARRIVAL => '新着順',

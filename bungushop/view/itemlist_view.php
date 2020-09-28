@@ -12,7 +12,7 @@
         <script src="./js/itemlist.js"></script>
     </head>
     <body>
-        <?php include VIEW_PATH . 'templates/header_logined.php'; ?>
+        <?php include VIEW_PATH . 'templates/header_logined_view.php'; ?>
         
         <ul class="no_style red tx-center p-0">
         <?php foreach($errors as $error) { ?>
@@ -98,7 +98,8 @@
                     <?php foreach ($items as $item) { ?>
                     <div class="product pd-10">
                         <div class="left">
-                            <img src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>" title="<?php print entity_str($item['comment']); ?>">
+                            <img class="productImg" src="<?php print entity_str(IMAGE_PATH . $item['item_img']); ?>">
+                            <p class="comment_box"><?php print entity_str($item['comment']); ?></p>
                         </div>
                         <div class="right">
                             <p>商品名: <?php print entity_str($item['name']); ?></p>
@@ -111,7 +112,8 @@
                                 <form method="POST">
                                     <input type="hidden" name="sql_kind" value="cart">
                                     <input type="hidden" name="item_id" value="<?php print entity_str($item['item_id']); ?>">
-                                    <input class="add_amount" type="text" name="amount" value=1>個
+                                    <select name="amount" class="add_amount">
+                                    </select>
                                     <input type="hidden" name="token" value="<?php print $token; ?>">
                                     <input type="submit" class="insert" value="カートに追加">
                                 </form>
@@ -134,25 +136,22 @@
             </main>
 
             <aside class="bg-white tx-center pd-10">
-                <div class="my-10">
-                    <a href="http://118.27.17.227/veggieshop/index.php">
-                        野菜ショップへ
-                        <br>
-                        （※Bootstrap使用）
-                    </a>
-                </div>
                 <ul class="no_style pd-6">
                     <li class="my-10">
-                        <a href="https://codecamp.jp/">
+                        <a href="http://118.27.17.227/veggieshop/index.php">
                             <img src="<?php print(STRUCTURE_PATH .  "ad1.png"); ?>">
+                            <span>野菜ショップ</span>
                         </a>
-                        <p class="fz-14 m-0">お世話になった学習サイトです</p>
                     </li>
                     <li class="my-20">
-                        <a href="https://codecamp.jp/">
+                        <a href="http://118.27.17.227/index.html">
                             <img src="<?php print(STRUCTURE_PATH .  "ad2.png"); ?>">
+                            <span>
+                            ポートフォリオ
+                            <br>
+                            トップページ
+                            </span>
                         </a>
-                        <p class="fz-14 m-0">素晴らしい講師がいらっしゃいます</p>
                     </li>
                 </ul>
             </aside>
@@ -182,7 +181,8 @@
                             <form method="POST">
                                 <input type="hidden" name="sql_kind" value="cart">
                                 <input type="hidden" name="item_id" value="<?php print entity_str($popular_item['item_id']); ?>">
-                                <input class="add_amount" type="text" name="amount" value=1>個
+                                <select name="amount" class="add_amount">
+                                </select>
                                 <input type="hidden" name="token" value="<?php print $token; ?>">
                                 <input type="submit" class="insert" value="カートに追加">
                             </form>
