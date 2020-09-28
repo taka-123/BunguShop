@@ -140,16 +140,20 @@
                     <li class="my-10">
                         <a href="http://118.27.17.227/veggieshop/index.php">
                             <img src="<?php print(STRUCTURE_PATH .  "ad1.png"); ?>">
-                            <span>野菜ショップ</span>
+                            <span>
+                                野菜ショップへ
+                                <br>
+                                ※Bootstrap使用
+                            </span>
                         </a>
                     </li>
                     <li class="my-20">
                         <a href="http://118.27.17.227/index.html">
                             <img src="<?php print(STRUCTURE_PATH .  "ad2.png"); ?>">
                             <span>
-                            ポートフォリオ
-                            <br>
-                            トップページ
+                                ポートフォリオ
+                                <br>
+                                トップページへ
                             </span>
                         </a>
                     </li>
