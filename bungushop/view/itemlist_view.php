@@ -136,25 +136,22 @@
             </main>
 
             <aside class="bg-white tx-center pd-10">
-                <div class="my-10">
-                    <a href="http://118.27.17.227/veggieshop/index.php">
-                        野菜ショップへ
-                        <br>
-                        （※Bootstrap使用）
-                    </a>
-                </div>
                 <ul class="no_style pd-6">
                     <li class="my-10">
-                        <a href="https://codecamp.jp/">
+                        <a href="http://118.27.17.227/veggieshop/index.php">
                             <img src="<?php print(STRUCTURE_PATH .  "ad1.png"); ?>">
+                            <span>野菜ショップ</span>
                         </a>
-                        <p class="fz-14 m-0">お世話になった学習サイトです</p>
                     </li>
                     <li class="my-20">
-                        <a href="https://codecamp.jp/">
+                        <a href="http://118.27.17.227/index.html">
                             <img src="<?php print(STRUCTURE_PATH .  "ad2.png"); ?>">
+                            <span>
+                            ポートフォリオ
+                            <br>
+                            トップページ
+                            </span>
                         </a>
-                        <p class="fz-14 m-0">素晴らしい講師がいらっしゃいます</p>
                     </li>
                 </ul>
             </aside>

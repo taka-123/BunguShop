@@ -108,6 +108,14 @@ aside {
     width: 160px; 
 }
 
+aside li {
+    padding-bottom: 50px;
+}
+
+aside img {
+    width: 100%; 
+}
+
 .popular_item {
     height: 430px;
     width: 90%;
@@ -276,16 +284,25 @@ nav {
     aside{
         width: 96%;
         margin: 0 auto;
-        height: 480px;
+        height: 500px;
     }
     aside ul {
         display: flex;
     }
     aside li {
         flex: 1;
-        margin: 0 !important;
+        padding: 0;
+        margin: 0 auto !important;
     }
-    
+    aside li a img {
+        width: 60%;
+    }
+    aside li a span {
+        width: 60%;
+        display: block;
+        margin: 0 auto;
+    }
+
     .popular_item {
         width: 98%;
         height: 100%;
