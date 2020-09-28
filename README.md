@@ -1,3 +1,6 @@
+http://118.27.17.227/bungushop/itemlist.php
+
+
 ## dockerの立ち上げ
 
 cd ~/MyDocker/ec_site/laradock
