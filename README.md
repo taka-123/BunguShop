@@ -1,80 +1,12 @@
-# 課題開発用リポジトリについて
-
-このリポジトリは課題開発用のリポジトリです。
-このリポジトリは直接クローンせず、
-一旦フォークしてからクローンして課題を開始してください。
-
-## リポジトリのフォーク・クローン
-
-このリポジトリからフォークしてクローンを行います。
-
-MyDockerディレクトリ直下に
-ec_site ディレクトリを作成し
-移動します。
-
-```bash
-mkdir ~/MyDocker/ec_site
-cd ~/MyDocker/ec_site
-```
-
-開発課題のリポジトリをフォークして、自分のアカウントのリポジトリにします。  
-
-右上にあるフォークボタン(Forkと書かれたボタン）をクリックすると、
-皆さんご自身の管理リポジトリの中に課題リポジトリのコピーが追加されます。
-
-
-フォークしたリポジトリを開き、現在のディレクトリ(テキストではlamp_practice)にクローンします。
-
-```
-git clone [リポジトリurl] .
-```
-
-各種ファイルのダウンロードが終わるまでしばらく待ちましょう。
-
 ## dockerの立ち上げ
 
-ダウンロードが終わったら、lamp_dock ディレクトリに移動し、
-dockerを立ち上げます。
-
-```bash
-cd lamp_dock
-docker-compose up
-```
-
-しばらくの間、コンテナ構築の処理が行われます。（特にmysqlコンテナの構築が終わるまでしばらく待ちます。）
-
-なお、docker-compose up (-dオプションなし) で起動した場合には
-Ctrl + C でコンテナを終了できます。
-
-## Docker Toolboxをご利用の方へ
-
-1. volumesの指定について、現在のディレクトリ（.）が指定されている箇所をクローンしたlamp_dockディレクトリに書き換えてください(lamp_dock内でpwd)
-2. localhostの指定については、仮想マシンのipアドレスに読み替えてください。
+cd ~/MyDocker/ec_site/laradock
+docker-compose up -d apache2 mysql phpmyadmin
 
 ## 確認
 
-* ドキュメントルート: http://localhost:8080
+* ドキュメントルート: http://localhost/bungushop/itemlist.php
 * phpmyadmin: http://localhost:8888
-
-にそれぞれアクセスし、アプリケーションのトップページ(ログイン画面)および
-phpmyadminのログイン画面が表示されることを確認しておきましょう。
-
-(Docker ToolBoxをお使いの方は、仮想マシンのipアドレスにアクセスしてください。)
-
-
-phpmyadminでログインしようとして失敗する場合には、mysqlコンテナの構築が途中の段階である可能性が高いです。
-うまくいかない場合、一度コンテナをdownしてから、再度
-
-```
-docker-compose up -d 
-```
-
-で立ち上げましょう。
-
-## SQLによるインポート
-
-クローンしたリポジトリの lamp_dock ディレクトリには sample.sql というインポート用のsqlファイルが含まれています。
-phpmyadmin で sampleデータベースを選択して、「インポート」から sample.sql を選択してインポートしましょう。
 
 ## 課題開発環境のまとめ
 
@@ -94,12 +26,17 @@ phpmyadmin で sampleデータベースを選択して、「インポート」�
 * id: sampleuser
 * pass: password
 
+localhost:8888
+* server: testuser
+* id: mysql
+* pass: password
+
 ### dockerの起動・停止
 
-~/MyDocker/lamp_practice/lamp_dock ディレクトリに移動し、
+~/MyDocker/ec_site/lamp_dock ディレクトリに移動し、
 
 ``` 
-docker-compose up -d
+docker-compose up -d apache2 mysql phpmyadmin
 ```
 でコンテナを起動します。
 
